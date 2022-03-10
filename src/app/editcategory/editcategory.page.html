@@ -1,0 +1,47 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{'edit_category' | translate}}</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color">
+	<div class="banner">
+		<h2 class="ion-text-center">{{'ad_category_thumnnail' | translate}}</h2>
+		<div class="profile-img">
+			<div class="img-box">
+				<img src="assets/imgs/c1.png">
+			</div>
+			<ion-icon class="text-white add-pic zmdi zmdi-camera"></ion-icon>
+		</div>
+	</div>
+
+	<ion-list lines="none">
+		<div class="form">
+			<h2 class="d-flex">{{'category_name' | translate}}</h2>
+			<ion-item lines="none">
+				<ion-input type="text" value="Vegetables & Fruits"></ion-input>
+			</ion-item>
+
+			<h2 class="d-flex " style="padding-top: 10px;">{{'category_description' | translate}}</h2>
+			<ion-item lines="none">
+				<ion-textarea rows="5" type="text" value="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."></ion-textarea>
+			</ion-item>
+		</div>
+
+		<div class="form">
+			<h2>{{'parent_category' | translate}}</h2>
+			<ion-item lines="none">
+				<ion-select [(ngModel)]="categorie">
+					<ion-select-option value="apparels">Beverages & foods products</ion-select-option>
+					<ion-select-option value="apparels2">Bakery & Dairy Products</ion-select-option>
+				</ion-select>
+			</ion-item>
+		</div>
+	</ion-list>
+</ion-content>
+<ion-footer class="ion-no-border">
+	<ion-button size="large" expand="full" class="btn">{{'update_info' | translate}}</ion-button>
+</ion-footer>

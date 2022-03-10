@@ -1,0 +1,151 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{cuantosPedidos}} Pedidos {{hoy}}</ion-title>
+  </ion-toolbar>
+  <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment" lines="none">
+    <ion-segment-button value="0">
+      <ion-label>
+        Asignados
+      </ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="1">
+      <ion-label>
+        Completados
+      </ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content class="bg_color">
+  <div class="order-list">
+    <ion-slides #slides (ionSlideDidChange)="slideChanged()">
+      <ion-slide>
+        <ion-list lines="none">
+          <ion-item *ngFor="let p of pedidos">
+            <div class="item_inner d-flex">
+              <ion-avatar item-start>
+                <ion-icon style="color: orangered" name="radio-button-on-outline"
+                          *ngIf="p.estadoPedido==='Nuevo'"></ion-icon>
+                <ion-icon style="color: dodgerblue" name="radio-button-on-outline"
+                          *ngIf="p.estadoPedido==='Terminado'"></ion-icon>
+              </ion-avatar>
+              <div class="contant">
+                <h2 class="d-flex">
+                                    <span class="text" *ngIf="p.estadoPedido==='Nuevo'">
+                                        Recoleccion
+                                        <small>
+                                            Orden: {{p.idCorto}}
+                                        </small>
+                                    </span>
+                  <span class="text" *ngIf="p.estadoPedido==='Terminado'">
+                                        Entrega
+                                        <small>
+                                            Orden: {{p.doc}}
+                                        </small>
+                                    </span>
+                  <span class="end">
+                                        <ion-button size="large" expand="block" (click)="orderDetail(p.id,p.userId)"
+                                                    class="btn end">Detalles</ion-button>
+                                    </span>
+                </h2>
+                <h3 class="d-flex">
+                                    <span class="text">
+                                        <small>
+                                            Total
+                                        </small>
+                                        <strong>
+                                            <p>${{p.total}}</p>
+                                        </strong>
+                                    </span>
+                  <span class="end text">
+                                        <small>
+                                           El cliente paga
+                                        </small>
+                                        <strong>
+                                            <p>{{p.metodoDePago}} al {{p.cuandoEfectivo}}</p>
+                                        </strong>
+                                    </span>
+                </h3>
+                <h3 class="d-flex" >
+                                    <span class="text">
+                                        <small>
+                                            Dirección
+                                        </small>
+                                        <strong>
+                                            <p>{{p.direccion.direccion}}</p>
+                                        </strong>
+                                    </span>
+                </h3>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+
+      <ion-slide>
+
+        <ion-list class="completed" lines="none">
+          <ion-item >
+          <!--  <div class="item_inner d-flex">
+              <ion-avatar item-start>
+                <ion-icon style="color: darkgreen" name="radio-button-on-outline"
+                          *ngIf="p.estadoPedido==='Entregado'"></ion-icon>
+              </ion-avatar>
+              <div class="contant">
+                <h2 class="d-flex">
+                                    <span class="text" >
+                                        Completada
+                                        <small>
+                                            {{"order_no" | translate}} 22145052
+                                        </small>
+                                    </span>
+                  <span class="end">
+                                        <ion-button size="large" expand="block"
+                                                    class="btn end">{{'state_delivered' | translate}}</ion-button>
+                                    </span>
+                </h2>
+                <h3 class="d-flex" >
+                                    <span class="text">
+                                        <small>
+                                            {{"delivered_on" | translate}}
+                                        </small>
+                                        <strong>
+                                            <p>
+                                                <span>21 June 2020</span>
+                                                02:15 pm
+                                            </p>
+
+                                        </strong>
+                                    </span>
+                  <span class="end text">
+                                        <small>
+                                            {{"payment" | translate}}
+                                        </small>
+                                        <strong>
+                                            <p>
+                                                <span>$ 78.00</span>
+                                                Cash On Delivery
+                                            </p>
+
+                                        </strong>
+                                    </span>
+                </h3>
+                <h3 class="d-flex" >
+                                    <span class="text">
+                                        <small>
+                                            {{"address" | translate}}
+                                        </small>
+                                        <strong>
+                                            <p>B11 Old Ford Street, Workshop Tower..</p>
+                                        </strong>
+                                    </span>
+                </h3>
+              </div>
+            </div>-->
+          </ion-item>
+
+        </ion-list>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>

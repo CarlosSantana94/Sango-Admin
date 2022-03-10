@@ -1,0 +1,40 @@
+<!--
+<ion-header>
+  <ion-toolbar>
+    <ion-title>orderupdate</ion-title>
+  </ion-toolbar>
+</ion-header>
+-->
+
+<ion-content (click)="dismiss()">
+
+
+</ion-content>
+<ion-footer>
+	<ion-list lines="none">
+		<div class="list_header"> {{'update_order_status' | translate}}</div>
+		<ion-radio-group>
+			<ion-item>
+				<ion-label class="ion-text-center">{{'procesing' | translate}}</ion-label>
+				<ion-radio checked="true" value="Procesing"></ion-radio>
+			</ion-item>
+			<ion-item>
+				<ion-label class="ion-text-center">{{'on_hold' | translate}}</ion-label>
+				<ion-radio value="on_hold"></ion-radio>
+			</ion-item>
+			<ion-item>
+				<ion-label class="ion-text-center">{{'ready_to_deliver' | translate}}</ion-label>
+				<ion-radio value="ready_to_deliver"></ion-radio>
+			</ion-item>
+			<ion-item>
+				<ion-label class="ion-text-center">{{'completed' | translate}}</ion-label>
+				<ion-radio value="completed"></ion-radio>
+			</ion-item>
+			<ion-item>
+				<ion-label class="ion-text-center">{{'cancelled' | translate}}</ion-label>
+				<ion-radio value="cancelled"></ion-radio>
+			</ion-item>
+		</ion-radio-group>
+	</ion-list>
+	<ion-button size="large" expand="full" class="btn" (click)="dismiss()">{{'close' | translate}}</ion-button>
+</ion-footer>

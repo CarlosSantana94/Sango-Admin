@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "sango-tintorerias"
+  },
+  "targets": {
+    "sango-tintorerias": {
+      "hosting": {
+        "app": [
+          "sango-tintorerias"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,148 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            <h2>{{'orders' | translate}} UDL 2214<span>20 Jun, 11:30am</span></h2>
+        </ion-title>
+    </ion-toolbar>
+    <div class="info d-flex">
+        <div class="about">
+            <h2 class="d-flex">Sam Smith</h2>
+            <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+        </div>
+        <h4 class="end ion-text-end">$250.00</h4>
+    </div>
+
+    <ion-segment mode="md" lines="none" (ionChange)="segmentChanged()" [(ngModel)]="segment">
+        <ion-segment-button mode="md" value="0">
+            <ion-label>
+                {{'ordered_items' | translate}}
+            </ion-label>
+        </ion-segment-button>
+        <ion-segment-button mode="md" value="1">
+            <ion-label>
+                {{'customer_info' | translate}}
+            </ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+</ion-header>
+
+
+<ion-content class="bg_color">
+    <div class="tab_container">
+        <ion-slides #slides (ionSlideDidChange)="slideChanged()">
+            <ion-slide>
+                <div class="tab_content">
+                    <ion-card>
+                        <div class="item_list">
+                            <div class="item">
+                                <h3 class="d-flex">
+                                    <span class="quantity">2</span>
+                                    <span class="multiply">x</span>
+                                    <span class="item_name">Shirts (Man)</span>
+                                    <span class="for_this">Wash & Iron</span>
+                                    <span class="amount end ion-text-end">$20</span>
+                                </h3>
+                            </div>
+                            <div class="item">
+                                <h3 class="d-flex">
+                                    <span class="quantity">3</span>
+                                    <span class="multiply">x</span>
+                                    <span class="item_name">Trouser (Man)</span>
+                                    <span class="for_this">Wash & Iron</span>
+                                    <span class="amount end ion-text-end">$25</span>
+                                </h3>
+                            </div>
+                            <div class="item">
+                                <h3 class="d-flex">
+                                    <span class="quantity">1</span>
+                                    <span class="multiply">x</span>
+                                    <span class="item_name">Jeans (Man)</span>
+                                    <span class="for_this">Wash & Iron</span>
+                                    <span class="amount end ion-text-end">$10</span>
+                                </h3>
+                            </div>
+                            <div class="item">
+                                <h3 class="d-flex">
+                                    <span class="quantity">1</span>
+                                    <span class="multiply">x</span>
+                                    <span class="item_name">T-shirt (Woman)</span>
+                                    <span class="for_this">Wash & Iron</span>
+                                    <span class="amount end ion-text-end">$25</span>
+                                </h3>
+                            </div>
+                        </div>
+                    </ion-card>
+
+                    <ion-card class="total">
+                        <h5 class="d-flex service_tex">{{'service_tex' | translate}} <span class="end ion-text-end">10.00</span></h5>
+                        <h5 class="d-flex amount_paid_via">{{'amount_paid_via' | translate}} Credit Card <span class="end ion-text-end">$250.00</span></h5>
+                    </ion-card>
+                </div>
+            </ion-slide>
+
+
+
+            <ion-slide>
+                <div class="tab_content">
+                    <div class="customer_info">
+                        <ion-card>
+                            <div class="item_container">
+                                <div class="item">
+                                    <h2>{{'phone_number' | translate}}</h2>
+                                    <p>+1 987 654 3210</p>
+                                </div>
+
+                                <div class="item">
+                                    <h2>{{'email_address' | translate}}</h2>
+                                    <p>samsmith@mail.com</p>
+                                </div>
+
+                                <!--
+                                <div class="item">
+                                    <h2>{{'phone_number' | translate}}</h2>
+                                    <p>samsmith@mail.com</p>
+                                </div>
+-->
+
+                                <div class="item">
+                                    <h2>{{'shipping_address' | translate}}</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+
+                                <!--
+                                <div class="item">
+                                    <h2>{{'billing_address' | translate}}</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+-->
+                            </div>
+                        </ion-card>
+
+                    </div>
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <div class="container">
+        <h2 class="d-flex">
+            {{'order_status' | translate}}
+            <span class="end">
+                {{'pending' | translate}}
+            </span>
+        </h2>
+        <h2 class="d-flex">
+            {{'delivery_guy' | translate}}
+            <span class="end">
+                None
+            </span>
+        </h2>
+    </div>
+    <ion-button size="large" expand="full" class="btn" (click)="update_order()">{{'update' | translate}}</ion-button>
+</ion-footer>

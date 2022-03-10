@@ -1,0 +1,58 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+		</ion-buttons>
+		<ion-title>Editar Producto</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color">
+	<div class="banner">
+		<h2 class="d-flex"> <span class="end">Cambiar Imagen</span></h2>
+
+			<div class="img-box img_box">
+				<img src="assets/imgs/logo_sango.png" class="center_img">
+			</div>
+
+	</div>
+
+	<ion-list lines="none">
+		<div class="form">
+			<h2>Categoria: {{nombreServicio}}</h2>
+			<!--<ion-item lines="none">
+				<ion-select [(ngModel)]="categorie">
+					<ion-select-option value="apparels">{{nombre}}</ion-select-option>
+				</ion-select>
+			</ion-item>-->
+
+		</div>
+
+		<div class="form">
+			<h2 class="d-flex">Nombre</h2>
+			<ion-item lines="none">
+				<ion-input type="text" [(ngModel)]="producto.nombre"></ion-input>
+			</ion-item>
+			<h2 class="d-flex " style="padding-top: 10px;">Descripción</h2>
+			<ion-item lines="none">
+				<ion-textarea rows="5" type="text" [(ngModel)]="producto.descripcion"></ion-textarea>
+			</ion-item>
+		</div>
+
+		<div class="form">
+			<h2 class="d-flex">Precio</h2>
+			<ion-row>
+				<ion-col size="12">
+					<ion-item lines="none">
+						<ion-input type="number" [(ngModel)]="producto.precio"></ion-input>
+					</ion-item>
+				</ion-col>
+			</ion-row>
+		</div>
+
+
+	</ion-list>
+</ion-content>
+<ion-footer class="ion-no-border">
+	<ion-button size="large" expand="full" class="btn" (click)="actualizarProducto(producto)">Actualizar Producto</ion-button>
+</ion-footer>

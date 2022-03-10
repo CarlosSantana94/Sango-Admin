@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pedido {{pedidoSeleccionado}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg_color" fullscreen>
+  <div class="banner">
+    <div class="order_about">
+      <div class="about_box d-flex">
+        <h2>Nombre
+          <strong>{{direccion.nombreCompleto}}</strong>
+        </h2>
+        <a class="end" href="tel:{{direccion.tel}}">
+          <ion-icon class="zmdi zmdi-phone ion-text-center "></ion-icon>
+        </a>
+      </div>
+      <div class="about_box d-flex status">
+
+        <h2>
+          Estatus
+          <strong *ngIf="pedido.estadoPedido==='Nuevo'"> Recoger prendas</strong>
+        </h2>
+      </div>
+    </div>
+
+    <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment" lines="none">
+      <ion-segment-button value="0">
+        <ion-label>
+          Información
+        </ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1">
+        <ion-label>
+          Prendas
+        </ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <div class="tab_container">
+    <ion-slides #slides (ionSlideDidChange)="slideChanged()">
+      <ion-slide>
+        <div class="order_info">
+          <div class="info">
+            <ion-row>
+              <ion-col size="6">
+                <h2>Recoger</h2>
+                <p>{{pedido.recoger}}</p>
+              </ion-col>
+              <ion-col size="6">
+                <h2>Entregar</h2>
+                <p>{{pedido.entrega}}</p>
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <div class="address info">
+            <h2>Domicilio</h2>
+            <ion-row>
+              <ion-col size="10">
+                <p>{{direccion.direccion}}</p>
+              </ion-col>
+
+              <ion-col size="2" class="d-flex">
+                <ion-icon class="zmdi zmdi-navigation ion-text-center end"
+                          (click)="openMapsApp(direccion.lat,direccion.long)"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </div>
+
+          <div class="payment_info">
+            <h2>Total</h2>
+            <ion-row>
+              <ion-col size="12">
+                <h4 style="font-size: larger">${{pedido.total}}</h4>
+                <h5 *ngIf="pedido.metodoDePago==='efectivo' && pedido.cuandoEfectivo==='recibir'">El cliente paga al recibir sus prendas</h5>
+                <h5 *ngIf="pedido.metodoDePago==='efectivo' && pedido.cuandoEfectivo==='entregar'">El cliente paga al entregar sus prendas</h5>
+              </ion-col>
+            </ion-row>
+
+          </div>
+        </div>
+      </ion-slide>
+
+      <ion-slide>
+        <div class="cloth_list">
+          <!--                    <h2>{{"cloth_list" | translate}}</h2>-->
+          <div class="item_list">
+            <div class="item" *ngFor="let p of prendas">
+              <h3 class="d-flex">
+                <span class="quantity">{{p.cantidad}}</span>
+                <span class="multiply">x</span>
+                <span class="item_name">{{p.nombre}}</span>
+                <span class="amount end ion-text-end">{{p.precio}} c/u</span>
+              </h3>
+            </div>
+
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-button size="large" expand="block" class="btn">Recoger</ion-button>
+</ion-footer>

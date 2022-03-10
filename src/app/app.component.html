@@ -1,0 +1,56 @@
+<ion-app [dir]="rtlSide">
+    <ion-split-pane contentId="main-content">
+        <ion-menu contentId="main-content" type="overlay">
+            <ion-header>
+                <ion-menu-toggle auto-hide="false">
+                    <div class="banner">
+                        <div class="profile_bg center_img">
+                            <img src="assets/imgs/logo_sango.png" class="crop_img">
+                        </div>
+                        <div class="info  d-flex">
+                            <div class="img_box center_img">
+                                <img src="assets/imgs/logo_sango.png" class="crop_img">
+                            </div>
+                            <div class="text_box">
+                                <h2>ADMIN</h2>
+                            </div>
+                        </div>
+                    </div>
+                </ion-menu-toggle>
+                <div class="buy_this_app" *ngIf="config.showBuyPromt" (click)="buyappalert()">
+                    <ion-menu-toggle auto-hide="false" style="width: 100%; display: flex;">
+                        <h2>
+                            <!--                            <ion-icon class="zmdi zmdi-shopping-cart"></ion-icon>-->
+                            {{"buy_this_app" | translate}}
+                        </h2>
+                    </ion-menu-toggle>
+                </div>
+            </ion-header>
+
+            <ion-content>
+                <ion-list lines="none">
+                    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+                        <ion-item mode="ios" detail-icon="string" [routerLink]="[p.url]">
+                            <div class="item_inner d-flex">
+                                <ion-icon class="ion-text-start" slot="start" [class]="p.icon"></ion-icon>
+                                <h2>{{ p.title | translate}}</h2>
+                            </div>
+                        </ion-item>
+                    </ion-menu-toggle>
+                </ion-list>
+            </ion-content>
+
+            <ion-footer class="ion-no-border">
+                <div class="developed_by d-flex" (click)="developed_by()" *ngIf="config.showBuyPromt">
+                    <ion-menu-toggle auto-hide="false" class="d-flex">
+                        <h2>{{"developed_by" | translate}}</h2>
+                        <div class="img_box">
+                            <img src="assets/imgs/opus.png">
+                        </div>
+                    </ion-menu-toggle>
+                </div>
+            </ion-footer>
+        </ion-menu>
+        <ion-router-outlet id="main-content"></ion-router-outlet>
+    </ion-split-pane>
+</ion-app>

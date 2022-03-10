@@ -1,0 +1,31 @@
+<!--
+<ion-header>
+  <ion-toolbar>
+    <ion-title>signin</ion-title>
+  </ion-toolbar>
+</ion-header>
+-->
+
+
+<ion-content>
+	<div class="banner">
+		<img src="assets/imgs/logo_sango.png">
+	</div>
+	<div class="container">
+		<div class="form ">
+			<ion-list lines="none">
+				<ion-item lines="none">
+					<ion-input mode="md" type="name" placeholder="{{'enter_admin_username' | translate}}"></ion-input>
+				</ion-item>
+				<ion-item lines="none">
+					<ion-input mode="md" type="password" placeholder="{{'enter_admin_password' | translate}}"></ion-input>
+				</ion-item>
+			</ion-list>
+			<ion-button size="large" expand="block" class="btn" (click)="home()">{{'sign_in' | translate}}</ion-button>
+		</div>
+	</div>
+
+	<div class="bottom_section">
+		<img src="assets/imgs/sign_img.png">
+	</div>
+</ion-content>

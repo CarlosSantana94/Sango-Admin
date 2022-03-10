@@ -1,0 +1,1492 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'orders' | translate}}</ion-title>
+    </ion-toolbar>
+    <ion-segment mode="md" lines="none" (ionChange)="segmentChanged()" [(ngModel)]="segment" lines="none">
+        <ion-segment-button mode="md" value="0">
+            <ion-label>
+                {{'new_orders' | translate}}
+            </ion-label>
+        </ion-segment-button>
+        <ion-segment-button mode="md" value="1">
+            <ion-label>
+                {{'past_orders' | translate}}
+            </ion-label>
+        </ion-segment-button>
+    </ion-segment>
+</ion-header>
+
+<ion-content class="bg_color" fullscreen>
+    <div>
+        <ion-slides #slides (ionSlideDidChange)="slideChanged()">
+            <ion-slide>
+                <ion-list class="orders" lines="none">
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Sam Smith</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item>
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Sam Smith</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item>
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Sam Smith</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item>
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Sam Smith</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item>
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Sam Smith</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item>
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Sam Smith</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item>
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Sam Smith</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item>
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Sam Smith</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item>
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Sam Smith</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item>
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Sam Smith</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item>
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'pending' | translate}}</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+
+            <ion-slide>
+                <ion-list class="orders" lines="none">
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Samantha George</h2>
+                                    <p>104, walnut Street, Opp.Business Bank, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$250.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>UDL2214</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                    <ion-item (click)="ordersinfo()">
+                        <div class="item_inner">
+
+                            <div class="info d-flex">
+                                <div class="about">
+                                    <h2 class="d-flex">Emili Johnson</h2>
+                                    <p>B11, Amaziya Tower, Near Jolly, Musium, City Park, illinois,USA</p>
+                                </div>
+                                <h4 class="end ion-text-end">$790.00</h4>
+                            </div>
+                            <ion-row>
+                                <ion-col size="3">
+                                    <p>{{'order_num' | translate}}</p>
+                                    <h2>YDL2552</h2>
+                                </ion-col>
+                                <ion-col size="5">
+                                    <p>{{'orderde_on' | translate}}</p>
+                                    <h2>20 Jun, 11:30am</h2>
+                                </ion-col>
+                                <ion-col size="4" class="ion-text-end">
+                                    <p>{{'order_status' | translate}}</p>
+                                    <h2 class="order_status"> {{'confirmed' | translate}}?</h2>
+                                </ion-col>
+                            </ion-row>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+        </ion-slides>
+    </div>
+</ion-content>

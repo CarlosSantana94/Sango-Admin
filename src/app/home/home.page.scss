@@ -1,0 +1,196 @@
+ion-header {
+    background: var(--white);
+
+    ion-segment {
+        border: none !important;
+        width: fit-content;
+        margin: 0 auto;
+
+        ion-segment-button {
+            background: none !important;
+            position: relative;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-light2) !important;
+            text-transform: unset !important;
+            letter-spacing: 0;
+            --color-checked: var(--transparent) !important;
+            text-align: justify !important;
+            --background-checked: var(--transparent) !important;
+            --border-width: 0 !important;
+            --border-radius: 0 !important;
+            box-shadow: none !important;
+
+            ion-label {
+                opacity: .5;
+                transition: all .5;
+            }
+
+            &.segment-button-checked {
+                color: var(--text-black) !important;
+
+                ion-label {
+                    opacity: 1;
+                }
+            }
+
+        }
+    }
+}
+
+.graph_tab {
+    background: var(--white);
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-bottom: 10px solid var(--bg-color);
+
+    ion-segment {
+        border: none !important;
+        width: calc(100% - 40px);
+        margin: 0 auto;
+        background: var(--bg-color);
+        border-radius: 5px;
+
+        ion-segment-button {
+            background: none !important;
+            position: relative;
+            font-size: .83rem;
+            font-weight: 500;
+            color: var(--text-light) !important;
+            text-transform: unset !important;
+            letter-spacing: 0;
+            --color-checked: var(--transparent) !important;
+            text-align: justify !important;
+            --background-checked: var(--transparent) !important;
+            --border-width: 0 !important;
+            --border-radius: 0 !important;
+            box-shadow: none !important;
+            min-height: 42px;
+            overflow: hidden;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                width: 0;
+                height: 0;
+                background: var(--primary);
+                transition: all .3s;
+                border-radius: 5px;
+            }
+
+            ion-label {
+                transition: all .5;
+            }
+
+            &.segment-button-checked {
+                color: var(--white) !important;
+
+                ion-label {
+                    opacity: 1;
+                }
+
+                &::before {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+        }
+    }
+
+
+    .graph {
+        width: 83%;
+        margin: 0 auto;
+        padding-top: 31px;
+
+        .graph_steck {
+            margin: 0 auto;
+            display: block;
+            width: 100%;
+            padding-bottom: 30px;
+
+            h2 {
+                position: relative;
+                overflow: hidden;
+                display: block;
+                width: 16px;
+                height: 200px;
+                margin: 0 auto;
+                background: var(--bg-color);
+
+                span {
+                    &.bar_active {
+                        position: absolute;
+                        width: 100%;
+                        bottom: 0;
+                        left: 0;
+                        background: var(--primary);
+
+                    }
+
+                }
+            }
+
+            p {
+                margin: 0;
+                font-size: .65rem;
+                font-weight: 500;
+                padding-top: 10px;
+            }
+        }
+    }
+
+    ion-button.btn {
+        width: calc(100% - 50px);
+        margin: 0 auto;
+    }
+}
+
+/* Bar Graph Vertical Animations */
+
+
+
+ion-footer {
+    background: var(--white);
+
+    ion-row {
+        padding-top: 7px;
+        padding-bottom: 15px;
+
+        ion-col {
+            padding: 0 20px;
+
+            h2 {
+                margin: 0;
+                font-size: 2.3rem;
+                font-weight: 400;
+                padding-top: 8px;
+                color: var(--text-dark2);
+            }
+
+            h3 {
+                font-size: 1rem;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                margin: 0;
+                color: var(--text-light2);
+                font-weight: 400;
+            }
+
+            p {
+                margin: 0;
+                font-size: .92rem;
+                font-weight: 500;
+                color: var(--primary);
+            }
+        }
+    }
+}

@@ -1,0 +1,291 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>{{'woocommerce' | translate}}</ion-title>
+	</ion-toolbar>
+	<ion-segment mode="md" [(ngModel)]="woocommerce" lines="none">
+		<ion-segment-button mode="md" value="orders">
+			<ion-label>
+				{{'orders' | translate}}
+			</ion-label>
+		</ion-segment-button>
+		<ion-segment-button mode="md" value="revenue">
+			<ion-label>
+				{{'revenue' | translate}}
+			</ion-label>
+		</ion-segment-button>
+	</ion-segment>
+</ion-header>
+
+<ion-content   fullscreen>
+	<div class="graph_tab" [ngSwitch]="woocommerce">
+		<!--Orders start-->
+		<div class="orders" *ngSwitchCase="'orders'">
+			<ion-segment mode="md" lines="none" [(ngModel)]="orders_tab">
+				<ion-segment-button mode="md" lines="none" value="weekly">
+					<ion-label>
+						{{'weekly' | translate}}
+					</ion-label>
+				</ion-segment-button>
+				<ion-segment-button mode="md" lines="none" value="monthly">
+					<ion-label>
+						{{'monthly' | translate}}
+					</ion-label>
+				</ion-segment-button>
+				<ion-segment-button mode="md" lines="none" value="yearly">
+					<ion-label>
+						{{'yearly' | translate}}
+					</ion-label>
+				</ion-segment-button>
+			</ion-segment>
+
+			<div class="orders" [ngSwitch]="orders_tab">
+				<div class="" *ngSwitchCase="'weekly'">
+					<div class="graph d-flex">
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 50%"></span></h2>
+							<p class="ion-text-center">20 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 55%"></span></h2>
+							<p class="ion-text-center">21 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 60%"></span></h2>
+							<p class="ion-text-center">22 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 45%"></span></h2>
+							<p class="ion-text-center">23 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 50%"></span></h2>
+							<p class="ion-text-center">24 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 70%"></span></h2>
+							<p class="ion-text-center">25 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 80%"></span></h2>
+							<p class="ion-text-center">26 Jun</p>
+						</div>
+					</div>
+					<ion-button size="large" expand="block" class="btn" (click)="orders()">{{'view_all_orders' | translate}}</ion-button>
+				</div>
+				<div class="" *ngSwitchCase="'monthly'">
+					<div class="graph d-flex monthly">
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 40%"></span></h2>
+							<p class="ion-text-center">May</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 65%"></span></h2>
+							<p class="ion-text-center">June</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 67%"></span></h2>
+							<p class="ion-text-center">July</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 25%"></span></h2>
+							<p class="ion-text-center">Aug</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 50%"></span></h2>
+							<p class="ion-text-center">Sept</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 80%"></span></h2>
+							<p class="ion-text-center">Oct</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 10%"></span></h2>
+							<p class="ion-text-center">Nov</p>
+						</div>
+					</div>
+					<ion-button size="large" expand="block" class="btn" (click)="orders()">{{'view_all_orders' | translate}}</ion-button>
+				</div>
+
+				<div class="" *ngSwitchCase="'yearly'">
+					<div class="graph d-flex ">
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 60%"></span></h2>
+							<p class="ion-text-center">2018</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 55%"></span></h2>
+							<p class="ion-text-center">2019</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 90%"></span></h2>
+							<p class="ion-text-center">2020</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 35%"></span></h2>
+							<p class="ion-text-center">2021</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 80%"></span></h2>
+							<p class="ion-text-center">2022</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 20%"></span></h2>
+							<p class="ion-text-center">2023</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 60%"></span></h2>
+							<p class="ion-text-center">2024</p>
+						</div>
+					</div>
+					<ion-button size="large" expand="block" class="btn" (click)="orders()">{{'view_all_orders' | translate}}</ion-button>
+				</div>
+			</div>
+		</div>
+		<!--Orders end-->
+
+
+
+		<!--Revenue start-->
+		<div class="orders" *ngSwitchCase="'revenue'">
+			<ion-segment mode="md" lines="none" [(ngModel)]="revenue">
+				<ion-segment-button mode="md" lines="none" value="weekly">
+					<ion-label>
+						{{'weekly' | translate}}
+					</ion-label>
+				</ion-segment-button>
+				<ion-segment-button mode="md" lines="none" value="monthly">
+					<ion-label>
+						{{'monthly' | translate}}
+					</ion-label>
+				</ion-segment-button>
+				<ion-segment-button mode="md" lines="none" value="yearly">
+					<ion-label>
+						{{'yearly' | translate}}
+					</ion-label>
+				</ion-segment-button>
+			</ion-segment>
+			<div class="orders" [ngSwitch]="revenue">
+				<div class="" *ngSwitchCase="'weekly'">
+					<div class="graph d-flex">
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 50%"></span></h2>
+							<p class="ion-text-center">20 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 55%"></span></h2>
+							<p class="ion-text-center">21 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 60%"></span></h2>
+							<p class="ion-text-center">22 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 45%"></span></h2>
+							<p class="ion-text-center">23 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 50%"></span></h2>
+							<p class="ion-text-center">24 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 70%"></span></h2>
+							<p class="ion-text-center">25 Jun</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 80%"></span></h2>
+							<p class="ion-text-center">26 Jun</p>
+						</div>
+					</div>
+					<ion-button size="large" expand="block" class="btn" (click)="orders()">{{'view_all_orders' | translate}}</ion-button>
+				</div>
+				<div class="" *ngSwitchCase="'monthly'">
+					<div class="graph d-flex monthly">
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 60%"></span></h2>
+							<p class="ion-text-center">May</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 15%"></span></h2>
+							<p class="ion-text-center">June</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 20%"></span></h2>
+							<p class="ion-text-center">July</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 46%"></span></h2>
+							<p class="ion-text-center">Aug</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 50%"></span></h2>
+							<p class="ion-text-center">Sept</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 30%"></span></h2>
+							<p class="ion-text-center">Oct</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 80%"></span></h2>
+							<p class="ion-text-center">Nov</p>
+						</div>
+					</div>
+					<ion-button size="large" expand="block" class="btn" (click)="orders()">{{'view_all_orders' | translate}}</ion-button>
+				</div>
+
+				<div class="" *ngSwitchCase="'yearly'">
+					<div class="graph d-flex ">
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 50%"></span></h2>
+							<p class="ion-text-center">2018</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 85%"></span></h2>
+							<p class="ion-text-center">2019</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 60%"></span></h2>
+							<p class="ion-text-center">2020</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 15%"></span></h2>
+							<p class="ion-text-center">2021</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 80%"></span></h2>
+							<p class="ion-text-center">2022</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 70%"></span></h2>
+							<p class="ion-text-center">2023</p>
+						</div>
+						<div class="graph_steck">
+							<h2><span class="bar_active" style="height: 40%"></span></h2>
+							<p class="ion-text-center">2024</p>
+						</div>
+					</div>
+					<ion-button size="large" expand="block" class="btn" (click)="orders()">{{'view_all_orders' | translate}}</ion-button>
+				</div>
+			</div>
+		</div>
+		<!--Revenue end-->
+	</div>
+</ion-content>
+
+
+<ion-footer class="ion-no-border">
+	<ion-row>
+		<ion-col size="6"  class="item-listed ion-text-end">
+			<h2>248</h2>
+			<h3>{{'total_items_listed' | translate}}</h3>
+			<p>{{'add_new' | translate}}</p>
+		</ion-col>
+		<ion-col size="6" class="categorie-created ion-text-start">
+			<h2>68</h2>
+			<h3>{{'categorie_created' | translate}}</h3>
+			<p>{{'create_new' | translate}}</p>
+		</ion-col>
+	</ion-row>
+</ion-footer>
