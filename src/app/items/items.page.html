@@ -4,6 +4,9 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>Productos</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="agregarProducto()">+</ion-button>
+        </ion-buttons>
     </ion-toolbar>
     <!--<ion-select mode="ios" interface="popover" [(ngModel)]="categories">
         <ion-select-option value="all_categories">All Categories</ion-select-option>
@@ -14,10 +17,10 @@
 <ion-content class="bg_color" fullscreen>
     <ion-list lines="none">
         <ion-item (click)="editItem(i.id,i.servicioId,i.servicio)" *ngFor="let i of productos">
-            <div class="item_inner d-flex">
+            <div class="item_inner d-flex" (click)="abrirEditorDeProducto(i)">
                 <div class="img_box center_img">
-                    <img *ngIf="i.img===''" src="assets/imgs/logo_sango.png" class="crop_img">
-                    <img *ngIf="i.img!==''" src="assets/imgs/prendas/{{i.img}}" class="crop_img">
+                    <img *ngIf="i.img==='' || i.img===undefined" src="assets/imgs/logo_sango.png" class="crop_img">
+                    <img *ngIf="i.img!=='' || i.img!==undefined" [src]="getSantizeUrl(i.img)" class="crop_img">
                 </div>
                 <div class="text_box">
                     <h2 class="d-flex">{{i.nombre}}</h2>

@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Nueva Sub Seccion</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-select placeholder="Seccion" [(ngModel)]="servicioSeleccionado"
+                    (ionChange)="cargarSubProductos(servicioSeleccionado)">
+            <ion-select-option [value]="sec.id" *ngFor="let sec of servicios">{{sec.nombre}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Titulo
+        </ion-label>
+        <ion-input type="name" [(ngModel)]="opcion.nombre"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-button (click)="addNewToGallery()">Seleccionar Imagen</ion-button>
+    </ion-item>
+    <ion-item >
+        <img *ngIf="imageSelected!==''" style="width: 300px; height: auto" src="data:image/png;base64,{{imageSelected}}">
+    </ion-item>
+
+    <ion-item *ngIf="imageSelected!=='' && opcion.nombre!=='' && servicioSeleccionado !==''">
+        <ion-button expand="block" color="success" (click)="guardarNuevaOpcion()">Guardar Sub Seccion
+            <ion-icon style="margin-left: 10px; color: darkgreen" name="save-outline"></ion-icon>
+        </ion-button>
+    </ion-item>
+
+
+</ion-content>

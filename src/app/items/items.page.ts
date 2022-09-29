@@ -6,6 +6,7 @@ import firebase from 'firebase';
 import FirebaseStorageError = firebase.storage.FirebaseStorageError;
 import {AngularFireStorage} from '@angular/fire/storage';
 import storage = firebase.storage;
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-items',
@@ -16,7 +17,8 @@ export class ItemsPage implements OnInit {
     productos: any = [];
 
     constructor(private route: Router,
-                private rest: RESTService) {
+                private rest: RESTService,
+                private sanitizer: DomSanitizer) {
     }
 
     ngOnInit() {
@@ -30,5 +32,17 @@ export class ItemsPage implements OnInit {
 
     editItem(idProducto: any, idServicio: any, nombreServicio: any) {
 
+    }
+
+    abrirEditorDeProducto(producto: any) {
+
+    }
+
+    agregarProducto() {
+        this.route.navigate(['./nuevo-producto']);
+    }
+
+    getSantizeUrl(url: string) {
+        return this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + url);
     }
 }
