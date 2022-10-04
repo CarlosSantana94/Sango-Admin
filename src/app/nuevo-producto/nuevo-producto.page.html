@@ -1,5 +1,8 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
         <ion-title>Nuevo Producto</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -12,6 +15,7 @@
         </ion-select>
     </ion-item>
     <ion-item>
+        <img  style="width: 50px; height: auto;" *ngIf="opcionSeleccionadaImg!==''" [src]=" opcionSeleccionadaImg">
         <ion-select placeholder="Sub Seccion" [(ngModel)]="opcionSeleccionada"
                     (ionChange)="seleccionarSubOpcion(opcionSeleccionada)">
             <ion-select-option [value]="sub" *ngFor="let sub of subServicios">
@@ -21,10 +25,6 @@
     </ion-item>
     <ion-item>
         <ion-button (click)="nuevaSubSeccion(servicioSeleccionado)">Nueva Sub seccion</ion-button>
-    </ion-item>
-    <ion-item *ngIf="opcionSeleccionadaImg!==''">
-        Imagen Sub Seccion
-        <img style="width: 50px; height: auto;" *ngIf="opcionSeleccionadaImg!==''" [src]=" opcionSeleccionadaImg">
     </ion-item>
     <ion-item>
         <ion-label position="floating">Titulo
@@ -41,18 +41,22 @@
         </ion-label>
         <ion-input type="number" [(ngModel)]="nuevaPrenda.precio"></ion-input>
     </ion-item>
+    <ion-item>
+        <ion-checkbox slot="start" [(ngModel)]="nuevaPrenda.porMetro"></ion-checkbox>
+        Precio x Metro?
+    </ion-item>
 
-    <div *ngIf="opcionSeleccionadaImg!==''">
+    <div *ngIf="opcionSeleccionadaImg!=='' && nuevaPrenda.nombre.length>2">
         <ion-item>
             <ion-checkbox slot="start" [(ngModel)]="usarMismaImagenQuePadre"></ion-checkbox>
-            Usar misma imagen que sub opcion (*Sirve para cuando hay un solo producto en la sub seccion*)
+            Usar misma imagen que sub opcion
         </ion-item>
         <ion-item *ngIf="!usarMismaImagenQuePadre">
             <ion-button (click)="addNewToGallery()">Seleccionar Imagen</ion-button>
         </ion-item>
         <ion-item *ngIf="!usarMismaImagenQuePadre">
             <img *ngIf="imageSelected!==''" style="width: 300px; height: auto"
-                 src="data:image/png;base64,{{imageSelected}}">
+                 src="{{imageSelected}}">
         </ion-item>
         <ion-item *ngIf="usarMismaImagenQuePadre">
             <img style="width: 300px; height: auto"

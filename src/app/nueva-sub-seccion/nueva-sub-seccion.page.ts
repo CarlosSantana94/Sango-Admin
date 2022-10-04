@@ -3,6 +3,10 @@ import {RESTService} from '../rest.service';
 import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {Camera, CameraResultType} from '@capacitor/camera';
+import {Observable} from 'rxjs';
+import {finalize, last, switchMap} from 'rxjs/operators';
+import {LoadingController} from '@ionic/angular';
+import loader from '@angular-devkit/build-angular/src/angular-cli-files/plugins/single-test-transform';
 
 
 @Component({
@@ -22,10 +26,12 @@ export class NuevaSubSeccionPage implements OnInit {
     servicioSeleccionado: any;
     imageElement: any;
     imageSelected: any;
+    loader: any;
 
     constructor(private rest: RESTService,
                 private route: Router,
                 private firestorage: AngularFireStorage,
+                private loadingCtrl: LoadingController
     ) {
     }
 
@@ -36,18 +42,9 @@ export class NuevaSubSeccionPage implements OnInit {
             this.servicios = serv;
             console.log(serv);
         });
+
     }
 
-    cargarSubProductos(servicioSeleccionado: any) {
-        this.rest.getOpciones(servicioSeleccionado).subscribe(opc => {
-            this.subServicios = opc;
-            console.log(opc);
-        });
-    }
-
-    nuevaSubSeccion(servicioSeleccionado: any) {
-        this.route.navigate(['./nueva-sub-seccion']);
-    }
 
 
     requestReadPermission() {
@@ -58,25 +55,67 @@ export class NuevaSubSeccionPage implements OnInit {
 
     uploadImageToFirebase(image) {
         // uploads image to firebase storage
-        this.firestorage.upload('productos', image)
-            .then(photoURL => {
-                console.log(photoURL);
-            });
+        const filePath = 'productos2.0/';
+        const fileRef = this.firestorage.ref(filePath + this.opcion.nombre);
+        const task = this.firestorage.upload(filePath + this.opcion.nombre, image);
+
+        task.snapshotChanges().pipe(
+            last(),
+            switchMap(() => fileRef.getDownloadURL())
+        ).subscribe(url => {
+            console.log('download url:', url);
+            this.opcion.img = url;
+            this.dismissLoader();
+        });
+    }
+
+    simpleLoader() {
+        this.loadingCtrl.create({
+            message: 'Subiendo Imagen...',
+            spinner: 'crescent'
+        }).then((response) => {
+            response.present();
+        });
+    }
+
+    dismissLoader() {
+        this.loadingCtrl.dismiss().then((response) => {
+            console.log('Loader closed!', response);
+        }).catch((err) => {
+            console.log('Error occured : ', err);
+        });
+    }
+
+    base64ToImage(dataURI) {
+        console.log();
+        const fileDate = dataURI.split(',');
+        // const mime = fileDate[0].match(/:(.*?);/)[1];
+        const byteString = atob(fileDate[1]);
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const int8Array = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) {
+            int8Array[i] = byteString.charCodeAt(i);
+        }
+        const blob = new Blob([arrayBuffer], {type: 'image/png'});
+        return blob;
     }
 
     async addNewToGallery() {
 
-        const capturedPhoto = await Camera.getPhoto({
+        await Camera.getPhoto({
             quality: 100,
-            resultType: CameraResultType.Base64
+            resultType: CameraResultType.DataUrl
         }).then(photo => {
-            this.imageSelected = photo.base64String;
-            this.opcion.img = this.imageSelected;
+            console.log(photo);
+            this.simpleLoader();
+            this.uploadImageToFirebase(this.base64ToImage(photo.dataUrl));
+            this.imageSelected = photo.dataUrl;
         });
     }
 
     guardarNuevaOpcion() {
         this.opcion.servicioId = this.servicioSeleccionado;
+
         this.rest.postOpciones(this.opcion).subscribe(resp => {
             console.log(resp);
             this.route.navigate(['./nuevo-producto']);
