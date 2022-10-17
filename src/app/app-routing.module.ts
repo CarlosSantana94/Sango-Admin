@@ -77,6 +77,10 @@ const routes: Routes = [
   {
     path: 'nueva-sub-seccion',
     loadChildren: () => import('./nueva-sub-seccion/nueva-sub-seccion.module').then( m => m.NuevaSubSeccionPageModule)
+  },
+  {
+    path: 'editar-producto',
+    loadChildren: () => import('./editar-producto/editar-producto.module').then( m => m.EditarProductoPageModule)
   }
 ];
 

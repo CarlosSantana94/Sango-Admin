@@ -34,4 +34,8 @@ export class RESTService {
         return this.http.post(environment.url + 'subOpciones', subOpcion);
     }
 
+    getProductoPorId(productoId: any): any {
+        return this.http.get(environment.url + 'productos/id/' + productoId);
+    }
+
 }

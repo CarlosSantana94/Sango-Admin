@@ -16,20 +16,26 @@
 
 <ion-content class="bg_color" fullscreen>
     <ion-list lines="none">
-        <ion-item (click)="editItem(i.id,i.servicioId,i.servicio)" *ngFor="let i of productos" style="background-color: #dbdbdb; border-radius: 20px">
-            <div class="item_inner d-flex" (click)="abrirEditorDeProducto(i)">
-                <div class="img_box center_img">
-                    <img *ngIf="i.img==='' || i.img===undefined" src="assets/imgs/logo_sango.png" class="crop_img">
-                    <img *ngIf="i.img!=='' || i.img!==undefined" [src]="i.img">
-                </div>
-                <div class="text_box">
-                    <h2 class="d-flex" style="color: #2e2e2e">{{i.nombre}}</h2>
-                    <h3 class="d-flex" style="color: #14990A">$ {{i.precio}} <span class="end ion-text-end"  *ngIf="i.porMetro">x Metro</span></h3>
-                    <h3 class="d-flex" style="font-size: small;color: #318080">{{i.servicio}} <ion-icon name="chevron-forward-outline"></ion-icon> <span style="color: #4c8dff;font-size: small"> {{i.servicioPadre}}</span></h3>
+        <ion-item-sliding *ngFor="let i of productos">
+            <ion-item-options side="start">
+                <ion-item-option color="warning" style="border-radius: 10px; margin: 2px;" (click)="editarArticulo(i)">Editar</ion-item-option>
+            </ion-item-options>
+            <ion-item (click)="editItem(i.id,i.servicioId,i.servicio)"  style="background-color: #dbdbdb; border-radius: 20px">
+                <div class="item_inner d-flex" (click)="abrirEditorDeProducto(i)">
+                    <div class="img_box center_img">
+                        <img *ngIf="i.img==='' || i.img===undefined" src="assets/imgs/logo_sango.png" class="crop_img">
+                        <img *ngIf="i.img!=='' || i.img!==undefined" [src]="i.img">
+                    </div>
+                    <div class="text_box">
+                        <h2 class="d-flex" style="color: #2e2e2e">{{i.nombre}}</h2>
+                        <h3 class="d-flex" style="color: #14990A">$ {{i.precio}} <span class="end ion-text-end"  *ngIf="i.porMetro">x Metro</span></h3>
+                        <h3 class="d-flex" style="font-size: small;color: #318080">{{i.servicio}} <ion-icon name="chevron-forward-outline"></ion-icon> <span style="color: #4c8dff;font-size: small"> {{i.servicioPadre}}</span></h3>
 
+                    </div>
                 </div>
-            </div>
-        </ion-item>
+            </ion-item>
+        </ion-item-sliding>
+
 
     </ion-list>
 

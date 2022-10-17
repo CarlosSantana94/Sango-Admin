@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-select placeholder="Seccion" [(ngModel)]="servicioSeleccionado"
+                (ionChange)="cargarSubProductos(servicioSeleccionado)">
+      <ion-select-option [value]="sec.id" *ngFor="let sec of servicios">{{sec.nombre}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <img  style="width: 50px; height: auto;" *ngIf="opcionSeleccionadaImg!==''" [src]="opcionSeleccionadaImg">
+    <ion-select placeholder="Sub Seccion" [(ngModel)]="opcionSeleccionada">
+      <ion-select-option [value]="sub.id" *ngFor="let sub of subServicios">
+        {{sub.nombre}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="nuevaSubSeccion()">Nueva Sub seccion</ion-button>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Titulo
+    </ion-label>
+    <ion-input type="name" [(ngModel)]="nuevaPrenda.nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Descripcion
+    </ion-label>
+    <ion-input type="name" [(ngModel)]="nuevaPrenda.descripcion"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Precio
+    </ion-label>
+    <ion-input type="number" [(ngModel)]="nuevaPrenda.precio"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-checkbox slot="start" [(ngModel)]="nuevaPrenda.porMetro"></ion-checkbox>
+    Precio x Metro?
+  </ion-item>
+
+  <div *ngIf="opcionSeleccionadaImg!=='' && nuevaPrenda.nombre.length>2">
+
+    <ion-item >
+      <ion-button (click)="addNewToGallery()">Seleccionar Imagen</ion-button>
+    </ion-item>
+    <ion-item>
+      <img *ngIf="imageSelected!==''" style="width: 300px; height: auto"
+           src="{{imageSelected}}">
+    </ion-item>
+
+  </div>
+
+  <ion-item
+          *ngIf="nuevaPrenda.nombre!=='' && nuevaPrenda.precio > 0 && servicioSeleccionado !==''
+            && opcionSeleccionadaId!==''">
+    <ion-button expand="block" color="success" (click)="guardarProducto()">Guardar Sub Seccion
+      <ion-icon style="margin-left: 10px; color: darkgreen" name="save-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+</ion-content>

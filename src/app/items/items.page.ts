@@ -62,4 +62,9 @@ export class ItemsPage implements OnInit {
             console.log('Error occured : ', err);
         });
     }
+
+    editarArticulo(producto: any) {
+        sessionStorage.setItem('productoAEditar', producto.id);
+        this.route.navigate(['./editar-producto']);
+    }
 }
