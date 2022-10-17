@@ -71,7 +71,7 @@ export class NuevaSubSeccionPage implements OnInit {
 
     simpleLoader() {
         this.loadingCtrl.create({
-            message: 'Subiendo Imagen...',
+            message: 'Cargando...',
             spinner: 'crescent'
         }).then((response) => {
             response.present();
@@ -114,10 +114,12 @@ export class NuevaSubSeccionPage implements OnInit {
     }
 
     guardarNuevaOpcion() {
+        this.simpleLoader();
         this.opcion.servicioId = this.servicioSeleccionado;
 
         this.rest.postOpciones(this.opcion).subscribe(resp => {
             console.log(resp);
+            this.dismissLoader();
             this.route.navigate(['./nuevo-producto']);
         });
     }

@@ -7,6 +7,7 @@ import FirebaseStorageError = firebase.storage.FirebaseStorageError;
 import {AngularFireStorage} from '@angular/fire/storage';
 import storage = firebase.storage;
 import {DomSanitizer} from '@angular/platform-browser';
+import {LoadingController} from '@ionic/angular';
 
 @Component({
     selector: 'app-items',
@@ -18,13 +19,15 @@ export class ItemsPage implements OnInit {
 
     constructor(private route: Router,
                 private rest: RESTService,
-                private sanitizer: DomSanitizer) {
+                private loadingCtrl: LoadingController) {
     }
 
     ngOnInit() {
+        this.simpleLoader();
         this.rest.getProductos().subscribe(data => {
             console.log(data);
             this.productos = data;
+            this.dismissLoader();
         });
 
     }
@@ -42,7 +45,21 @@ export class ItemsPage implements OnInit {
         this.route.navigate(['./nuevo-producto']);
     }
 
-    getSantizeUrl(url: string) {
-        return this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + url);
+
+    simpleLoader() {
+        this.loadingCtrl.create({
+            message: 'Cargando...',
+            spinner: 'crescent'
+        }).then((response) => {
+            response.present();
+        });
+    }
+
+    dismissLoader() {
+        this.loadingCtrl.dismiss().then((response) => {
+            console.log('Loader closed!', response);
+        }).catch((err) => {
+            console.log('Error occured : ', err);
+        });
     }
 }

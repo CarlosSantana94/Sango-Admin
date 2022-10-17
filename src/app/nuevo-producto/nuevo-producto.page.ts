@@ -68,12 +68,14 @@ export class NuevoProductoPage implements OnInit {
     }
 
     guardarProducto() {
+        this.simpleLoader();
         if (this.usarMismaImagenQuePadre) {
             this.nuevaPrenda.img = this.opcionSeleccionadaImgCruda;
         }
         console.log(this.nuevaPrenda);
         this.rest.postSubOpciones(this.nuevaPrenda).subscribe(resp => {
             console.log(resp);
+            this.dismissLoader();
             this.route.navigate(['./items']);
         });
     }
@@ -102,7 +104,7 @@ export class NuevoProductoPage implements OnInit {
 
     simpleLoader() {
         this.loadingCtrl.create({
-            message: 'Subiendo Imagen...',
+            message: 'Cargando...',
             spinner: 'crescent'
         }).then((response) => {
             response.present();

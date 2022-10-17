@@ -24,7 +24,7 @@
                 </div>
                 <div class="text_box">
                     <h2 class="d-flex" style="color: #2e2e2e">{{i.nombre}}</h2>
-                    <h3 class="d-flex" style="color: #14990A">$ {{i.precio}} <span class="end ion-text-end"></span></h3>
+                    <h3 class="d-flex" style="color: #14990A">$ {{i.precio}} <span class="end ion-text-end"  *ngIf="i.porMetro">x Metro</span></h3>
                     <h3 class="d-flex" style="font-size: small;color: #318080">{{i.servicio}} <ion-icon name="chevron-forward-outline"></ion-icon> <span style="color: #4c8dff;font-size: small"> {{i.servicioPadre}}</span></h3>
 
                 </div>
