@@ -23,11 +23,12 @@ export class AppComponent implements OnInit {
             url: '/pedidos',
             icon: 'zmdi zmdi-money'
         },
-        {
+        /*{
             title: 'dashboard',
             url: '/home',
             icon: 'zmdi zmdi-desktop-mac'
-        }, {
+        },*/
+        {
             title: 'Ruta',
             url: '/mapa',
             icon: 'zmdi zmdi-map'
@@ -39,11 +40,11 @@ export class AppComponent implements OnInit {
             icon: 'zmdi zmdi-shopping-basket'
         },
 
-       /* {
-            title: 'Categorias',
-            url: '/categories',
-            icon: 'zmdi zmdi-layers'
-        },*/
+        /* {
+             title: 'Categorias',
+             url: '/categories',
+             icon: 'zmdi zmdi-layers'
+         },*/
 
         {
             title: 'Mensajes',
@@ -109,16 +110,11 @@ export class AppComponent implements OnInit {
         }
     }
 
-//  buyAppAction() {
-//    window.open("https://bitly.com/cc2_Grocer", '_system', 'location=no');
-//  }
-
-
     buyappalert() {
         this.modalController.create({component: BuyappalertPage}).then((modalElement) => modalElement.present());
     }
 
     developed_by() {
-        window.open('https://opuslab.works/', '_system', 'location=no');
+        // window.open('https://opuslab.works/', '_system', 'location=no');
     }
 }

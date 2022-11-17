@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {IonSlides, Platform} from '@ionic/angular';
+import {AlertController, IonSlides, Platform} from '@ionic/angular';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {Router} from '@angular/router';
+import {RESTService} from '../rest.service';
 
 @Component({
   selector: 'app-order-info',
@@ -10,67 +12,79 @@ import {AngularFirestore} from '@angular/fire/firestore';
 export class OrderInfoPage implements OnInit {
   @ViewChild('slides', {static: true}) slider: IonSlides;
   segment = 0;
-  pedidoSeleccionado = '';
-  coords: any;
-
-  pedido: any = {
-    metodoDePago: undefined,
-    total: undefined,
-    cuandoEfectivo: undefined,
-    recoger: undefined,
-    entrega: undefined,
-    estadoPedido: undefined
-  };
-  direccion: any = {
-    lat: undefined,
-    long: undefined
-  };
   prendas = [];
+  resumen: any = [];
+  recogerFecha = '';
+  entregarFecha = '';
+  subTotal = 0;
 
-  constructor(private afs: AngularFirestore,
-              private platform: Platform) {
+  cargando: boolean;
+
+  constructor(private route: Router,
+              private rest: RESTService,
+              private alertController: AlertController) {
   }
 
   ngOnInit() {
-    this.pedidoSeleccionado = sessionStorage.getItem('pedidoSeleccionado');
+    this.cargando = false;
 
-    this.afs.doc('PedidosNuevos/' + sessionStorage.getItem('uid') + '/Listado/' + this.pedidoSeleccionado)
-        .valueChanges().subscribe(sel => {
-      console.log(sel);
-      this.pedido = Object.assign({}, sel);
+    this.rest.getCarritoPorId(sessionStorage.getItem('carritoSeleccionado')).subscribe(data => {
+      this.resumen = data;
+      this.cargando = true;
+      console.log(data);
+      this.rest.postOrdenParaConfirmar(data.prendasList, sessionStorage.getItem('carritoSeleccionado')).subscribe(resp => {
+        this.prendas = resp;
+        this.subTotal = 0;
+        this.prendas.forEach(p => {
+          if (p.revisada) {
+            this.subTotal += p.precioTotal;
+          }
+        });
+      });
     });
-    this.afs.collection('PedidosNuevos/' + sessionStorage.getItem('uid') + '/Listado/' + this.pedidoSeleccionado + '/Prendas')
-        .valueChanges().subscribe(pren => {
-      console.log(pren);
-      this.prendas = pren;
+
+  }
+
+  payment() {
+    this.route.navigate(['./payment']);
+  }
+
+
+  actualizarRevisado(reg, event) {
+    this.rest.postConfirmarPrendas(reg.reg, event.target.checked).subscribe(data => {
+      reg = data;
     });
-    this.afs.doc('PedidosNuevos/' + sessionStorage.getItem('uid') + '/Listado/' + this.pedidoSeleccionado + '/Direccion/seleccion')
-        .valueChanges().subscribe(dir => {
-      console.log(dir);
-      this.direccion = Object.assign({}, dir);
+    this.ngOnInit();
+  }
+
+  async presentAlertConfirm(estado) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirmar orden?',
+      message: 'Asegurate de validar todas las <strong>prendas</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+
+
+            this.rest.postCambiarEstadoCarrito(estado, sessionStorage.getItem('carritoSeleccionado')).subscribe(c => {
+              console.log(c);
+              this.route.navigate(['./pedidos']);
+            });
+          }
+        }
+      ]
     });
 
+    await alert.present();
   }
 
-  async segmentChanged() {
-    await this.slider.slideTo(this.segment);
+  presentarAlerta(estado) {
+    this.presentAlertConfirm(estado);
   }
-
-  async slideChanged() {
-    this.segment = await this.slider.getActiveIndex();
-  }
-
-  public openMapsApp(latitude: any, longitude: any) {
-    const destination = latitude + ',' + longitude;
-
-    console.log(destination);
-
-    if (this.platform.is('ios')) {
-      window.open('maps://?q=' + destination, '_system');
-    } else {
-      const label = encodeURI('Pedido');
-      window.open('geo:0,0?q=' + destination + '(' + label + ')', '_system');
-    }
-  }
-
 }

@@ -8,5 +8,6 @@ export const environment = {
     messagingSenderId: '726792798295',
     appId: '1:726792798295:web:fc41a194014d66853e2312',
     measurementId: 'G-HKPQCYNEFD'
-  }
+  },
+  url: 'https://aws.sango-api.app/'
 };

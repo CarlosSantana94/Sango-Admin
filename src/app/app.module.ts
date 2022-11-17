@@ -8,7 +8,7 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 import {TranslateLoader, TranslateModule, TranslatePipe} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 
 import {OrderupdatePageModule} from './orderupdate/orderupdate.module';
 
@@ -19,6 +19,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {DatePipe} from '@angular/common';
 import {AngularFireStorageModule} from '@angular/fire/storage';
+import {HttpInterceptorService} from './http-interceptor.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -49,7 +50,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         SplashScreen,
         DatePipe,
         {provide: APP_CONFIG, useValue: BaseAppConfig},
-        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
+        {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}
     ],
     bootstrap: [AppComponent]
 })

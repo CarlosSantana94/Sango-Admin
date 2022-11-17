@@ -30,7 +30,7 @@ export class EditarProductoPage implements OnInit {
     opcionSeleccionadaImgCruda: any;
     opcionSeleccionadaId: any;
     usarMismaImagenQuePadre: boolean;
-    private imageSelected: string;
+    imageSelected: string;
 
     constructor(private rest: RESTService,
                 private route: Router,

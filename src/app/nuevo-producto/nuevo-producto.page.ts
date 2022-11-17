@@ -29,7 +29,8 @@ export class NuevoProductoPage implements OnInit {
     opcionSeleccionadaImgCruda: any;
     opcionSeleccionadaId: any;
     usarMismaImagenQuePadre: boolean;
-    private imageSelected: string;
+     imageSelected: string;
+    mismoNombre: boolean;
 
     constructor(private rest: RESTService,
                 private route: Router,
@@ -41,6 +42,8 @@ export class NuevoProductoPage implements OnInit {
         this.imageSelected = '';
         this.opcionSeleccionadaImg = '';
         this.opcionSeleccionadaId = '';
+        this.nuevaPrenda.nombre = '';
+        this.nuevaPrenda.precio = 0;
         this.rest.getServicios().subscribe(serv => {
             this.servicios = serv;
             console.log(serv);
@@ -76,7 +79,8 @@ export class NuevoProductoPage implements OnInit {
         this.rest.postSubOpciones(this.nuevaPrenda).subscribe(resp => {
             console.log(resp);
             this.dismissLoader();
-            this.route.navigate(['./items']);
+            window.location.reload();
+            //this.route.navigate(['./items']);
         });
     }
 
