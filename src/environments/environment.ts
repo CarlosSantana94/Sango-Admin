@@ -14,6 +14,7 @@ export const environment = {
     measurementId: 'G-HKPQCYNEFD'
   },
   url: 'http://localhost:5000/',
+  mapsKey: 'AIzaSyBy7_b6P0zoFWuoO2Iu_geHCAjJ3S2jVQo'
 };
 
 /*

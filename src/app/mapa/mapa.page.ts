@@ -1,5 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NavController, Platform} from '@ionic/angular';
+import {environment} from '../../environments/environment';
+import {GoogleMap} from '@capacitor/google-maps';
+import {Router} from '@angular/router';
+import {DatePipe, formatDate} from '@angular/common';
+import {RESTService} from '../rest.service';
+import {Geolocation} from '@capacitor/geolocation';
 
 declare var google;
 
@@ -10,55 +16,88 @@ declare var google;
 })
 
 
-export class MapaPage implements OnInit {
+export class MapaPage {
 
-    // Map related
-    @ViewChild('map') public mapElement: ElementRef;
+    @ViewChild('map') mapRef: ElementRef;
 
-    map: any;
-
-    currentMapTrack = null;
-
-    isTracking = false;
-    trackedRoute = [];
-    previousTracks = [];
+    map: GoogleMap;
+    private markerId: string;
+    ubicaciones: any = [];
+    date: string;
+    markers: any[] = [];
 
 
-    constructor(public navCtrl: NavController,
-                private plt: Platform) {
+    constructor(private route: Router,
+                public datepipe: DatePipe,
+                private rest: RESTService) {
     }
 
-    ngOnInit() {
-        this.loadMap();
+
+    ionViewDidEnter() {
+        this.date = new Date().toISOString();
+        this.createMap();
     }
 
-    loadMap() {
-        const mapOptions = {
-            zoom: 5,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            mapTypeControl: false,
-            streetViewControl: false,
-            fullscreenControl: false
-        };
-        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    async createMap() {
+        const coordinates = await Geolocation.getCurrentPosition();
+        console.log(coordinates);
+        this.map = await GoogleMap.create({
+            id: 'my-map', // Unique identifier for this map instance
+            element: this.mapRef.nativeElement, // reference to the capacitor-google-map element
+            apiKey: environment.mapsKey, // Your Google Maps API Key
+            config: {
+                center: {
+                    // The initial position to be rendered by the map
+                    lat: coordinates.coords.latitude,
+                    lng: coordinates.coords.longitude,
+                },
+                zoom: 14, // The initial zoom level to be rendered by the map
+            },
+        });
+        await this.map.enableCurrentLocation(true);
+
     }
 
-    redrawPath(path) {
-        if (this.currentMapTrack) {
-            this.currentMapTrack.setMap(null);
+    async addMarker(lat, lng, title) {
+        // Add a marker to the map
+        if (this.markerId) {
+            this.removeMarker();
         }
+        this.markerId = await this.map.addMarker({
+            coordinate: {
+                lat,
+                lng,
+            },
+            draggable: false,
+            title
+        });
 
-        if (path.length > 1) {
-            this.currentMapTrack = new google.maps.Polyline({
-                path,
-                geodesic: true,
-                strokeColor: '#ff00ff',
-                strokeOpacity: 1.0,
-                strokeWeight: 3
-            });
-            this.currentMapTrack.setMap(this.map);
+        this.markers.push(this.markerId);
+    }
+
+    async removeMarker(id?) {
+        await this.map.removeMarker(id ? id : this.markerId);
+    }
+
+    async locate() {
+        if (this.map) {
+            await this.map.enableCurrentLocation(true);
         }
     }
 
+    cambioDeFecha() {
+        console.log(formatDate(this.date, 'yyyy/MM/dd', 'en', '-0600'));
+        this.rest.getRutaRepartidorPorDia(formatDate(this.date, 'yyyy-MM-dd', 'en', '-0600')).subscribe(ubi => {
 
+
+
+            // tslint:disable-next-line:prefer-for-of
+            console.log(ubi);
+            for (let i = 0; i < ubi.length; i++) {
+                this.addMarker(ubi[i].lat, ubi[i].lng, formatDate(ubi[i].fecha, 'd/M/yy, h:mm a', 'en', '-0600'));
+            }
+
+
+        });
+    }
 }

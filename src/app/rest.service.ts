@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../environments/environment';
+import * as http from 'http';
 
 @Injectable({
     providedIn: 'root'
@@ -68,6 +69,10 @@ export class RESTService {
 
     postCambiarEstadoCarrito(estado, idCarrito): any {
         return this.http.post(environment.url + 'cambiarEstadoCarrito/' + estado + '/' + idCarrito, '');
+    }
+
+    getRutaRepartidorPorDia(fecha): any {
+        return this.http.get(environment.url + 'repartidor/dia/' + fecha);
     }
 
 }
