@@ -86,18 +86,12 @@ export class MapaPage {
     }
 
     cambioDeFecha() {
-        console.log(formatDate(this.date, 'yyyy/MM/dd', 'en', '-0600'));
         this.rest.getRutaRepartidorPorDia(formatDate(this.date, 'yyyy-MM-dd', 'en', '-0600')).subscribe(ubi => {
-
-
-
             // tslint:disable-next-line:prefer-for-of
-            console.log(ubi);
+            this.map.removeMarkers(this.markers);
             for (let i = 0; i < ubi.length; i++) {
                 this.addMarker(ubi[i].lat, ubi[i].lng, formatDate(ubi[i].fecha, 'd/M/yy, h:mm a', 'en', '-0600'));
             }
-
-
         });
     }
 }

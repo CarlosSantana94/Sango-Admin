@@ -13,7 +13,7 @@ export const environment = {
     appId: '1:726792798295:web:fc41a194014d66853e2312',
     measurementId: 'G-HKPQCYNEFD'
   },
-  url: 'http://localhost:5000/',
+  url: 'https://sango-api.herokuapp.com/',
   mapsKey: 'AIzaSyBy7_b6P0zoFWuoO2Iu_geHCAjJ3S2jVQo'
 };
 

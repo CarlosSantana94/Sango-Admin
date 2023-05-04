@@ -87,4 +87,20 @@ export class OrderInfoPage implements OnInit {
   presentarAlerta(estado) {
     this.presentAlertConfirm(estado);
   }
+
+  ponerComentario(prenda) {
+    prenda.comentarioVisible = !prenda.comentarioVisible;
+    if (prenda.comentarioVisible === null) {
+      prenda.comentarioVisible = true;
+    }
+
+  }
+
+
+  guardarComentario(prenda: any) {
+    console.log(prenda);
+    this.rest.postComentarioPrenda(prenda.reg, prenda).subscribe(d => {
+      console.log(d);
+    });
+  }
 }

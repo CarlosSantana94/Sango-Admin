@@ -75,4 +75,8 @@ export class RESTService {
         return this.http.get(environment.url + 'repartidor/dia/' + fecha);
     }
 
+    postComentarioPrenda(registro, prenda): any {
+        return this.http.post(environment.url + 'prendaConfirmar/comentar/' + registro, prenda);
+    }
+
 }

@@ -57,6 +57,8 @@
     </h2>
     <div class="item_list">
       <div class="item" *ngFor="let prenda of prendas">
+        {{prenda.servicio}}>{{prenda.padre}}
+        <br>
         <h3 class="d-flex">
                     <span class="quantity"><ion-checkbox color="primary" (ionChange)="actualizarRevisado(prenda,$event)"
                                                          style="margin-right: 2px;padding-top: 5px;" [checked]="prenda.revisada"></ion-checkbox>
@@ -67,7 +69,27 @@
                   class="item_name">(${{prenda.precio}})</span></span>
           <span style="color: #5b80d9"
                 class="amount end ion-text-end">${{prenda.precioTotal | number : '1.2-2'}}</span>
+          <span
+                  class="amount end ion-text-end"><ion-icon style="color: #0c6d08" name="chatbox-outline"
+                                                            *ngIf="prenda.comentario==='' || prenda.comentario ===null"
+                                                            (click)="ponerComentario(prenda)"></ion-icon>
+                    <ion-icon name="chatbox-ellipses-outline" style="color: #6d0817"
+                              *ngIf="prenda.comentario !==null"
+                              (click)="ponerComentario(prenda)"></ion-icon></span>
         </h3>
+        <span *ngIf="prenda.comentarioVisible===true">
+                    <ion-label>Comentario:</ion-label>
+                    <ion-input style="background-color: #dedede"
+                               [(ngModel)]="prenda.comentario"></ion-input>
+                    <ion-button (click)="guardarComentario(prenda)" color="success" shape="round"
+                                style="margin-top: 2px"> <ion-icon name="save-outline"
+                                                                   style="margin-right: 6px; color: #2e2e2e">
+
+                    </ion-icon>
+                    Guardar Comentario
+                    </ion-button>
+
+                </span>
       </div>
     </div>
   </ion-card>
