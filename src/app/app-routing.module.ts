@@ -81,6 +81,14 @@ const routes: Routes = [
   {
     path: 'editar-producto',
     loadChildren: () => import('./editar-producto/editar-producto.module').then( m => m.EditarProductoPageModule)
+  },
+  {
+    path: 'principal',
+    loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule)
+  },
+  {
+    path: 'solicitud-cancelaciones',
+    loadChildren: () => import('./solicitud-cancelaciones/solicitud-cancelaciones.module').then( m => m.SolicitudCancelacionesPageModule)
   }
 ];
 

@@ -3,12 +3,13 @@
     "default": "sango-tintorerias"
   },
   "targets": {
-    "sango-tintorerias": {
+    "sango-admin": {
       "hosting": {
-        "app": [
-          "sango-tintorerias"
+        "admin": [
+          "sango-admin"
         ]
       }
     }
-  }
+  },
+  "etags": {}
 }

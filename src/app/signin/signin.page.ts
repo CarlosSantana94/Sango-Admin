@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
+import {RESTService} from '../rest.service';
 
 @Component({
     selector: 'app-signin',
@@ -7,14 +8,33 @@ import {NavController} from '@ionic/angular';
     styleUrls: ['./signin.page.scss'],
 })
 export class SigninPage implements OnInit {
+    username: any;
+    password: any;
+    servidor: any;
 
-    constructor(private navCtrl: NavController) {
+    constructor(private navCtrl: NavController,
+                private rest: RESTService) {
     }
 
     ngOnInit() {
+        this.rest.getHealth().subscribe(h => {
+            console.log(h);
+            this.servidor = h.isUp;
+
+            if (h.is && localStorage.getItem('uid') !== null) {
+                this.navCtrl.navigateRoot(['./tabs']);
+            }
+
+            if (!this.servidor) {
+                localStorage.clear();
+                sessionStorage.clear();
+            }
+        });
     }
 
     home() {
-        this.navCtrl.navigateRoot(['./pedidos']);
+        if (this.username === 'admin' && this.password === 'admin') {
+            this.navCtrl.navigateRoot(['./principal']);
+        }
     }
 }

@@ -79,4 +79,15 @@ export class RESTService {
         return this.http.post(environment.url + 'prendaConfirmar/comentar/' + registro, prenda);
     }
 
+    obtenerDesgloseDeCarritos(): any {
+        return this.http.get(environment.url + 'desgloseTodosLosPedidos');
+    }
+
+    obtenerCarritoPorEstado(estado): any {
+        return this.http.get(environment.url + 'estado/' + estado);
+    }
+
+    getHealth(): any {
+        return this.http.get(environment.url + 'health');
+    }
 }

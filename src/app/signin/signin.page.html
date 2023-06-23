@@ -1,31 +1,35 @@
-<!--
-<ion-header>
-  <ion-toolbar>
-    <ion-title>signin</ion-title>
-  </ion-toolbar>
-</ion-header>
--->
-
-
 <ion-content>
-	<div class="banner">
+	<ion-row style="align-content: center; padding-top: 16px">
+		<ion-col>
+			<ion-title>ADMIN</ion-title>
+		</ion-col>
+	</ion-row>
+	<div class="banner" style="background-color: white !important;">
 		<img src="assets/imgs/logo_sango.png">
 	</div>
+
 	<div class="container">
 		<div class="form ">
 			<ion-list lines="none">
 				<ion-item lines="none">
-					<ion-input mode="md" type="name" placeholder="{{'enter_admin_username' | translate}}"></ion-input>
+					<ion-input mode="md" type="name" placeholder="{{'enter_admin_username' | translate}}" [(ngModel)]="username"></ion-input>
 				</ion-item>
 				<ion-item lines="none">
-					<ion-input mode="md" type="password" placeholder="{{'enter_admin_password' | translate}}"></ion-input>
+					<ion-input mode="md" type="password" placeholder="{{'enter_admin_password' | translate}}" [(ngModel)]="password"></ion-input>
 				</ion-item>
 			</ion-list>
-			<ion-button size="large" expand="block" class="btn" (click)="home()">{{'sign_in' | translate}}</ion-button>
+			<ion-button size="large" expand="block" class="btn" (click)="home()">Iniciar Administrador</ion-button>
 		</div>
 	</div>
 
-	<div class="bottom_section">
-		<img src="assets/imgs/sign_img.png">
-	</div>
+	<ion-footer>
+		<div class="bottom_section">
+			<img src="assets/imgs/adminimg%20login.png">
+		</div>
+
+		<h5 class="ion-text-center" *ngIf="servidor" >v0.0.1<ion-icon style="color: #29af5d" name="radio-button-on-outline"></ion-icon></h5>
+		<h5 class="ion-text-center" *ngIf="!servidor" >v0.0.1<ion-icon style="color: #ed576b" name="radio-button-on-outline"></ion-icon></h5>
+	</ion-footer>
+
+
 </ion-content>

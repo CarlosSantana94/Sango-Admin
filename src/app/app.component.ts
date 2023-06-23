@@ -19,9 +19,19 @@ export class AppComponent implements OnInit {
     public selectedIndex = 0;
     public appPages = [
         {
+            title: 'Inicio',
+            url: '/principal',
+            icon: 'zmdi zmdi-home'
+        },
+        {
             title: 'Pedidos',
             url: '/pedidos',
             icon: 'zmdi zmdi-money'
+        },
+        {
+            title: 'Solicitud Cancelaciones',
+            url: '/solicitud-cancelaciones',
+            icon: 'zmdi zmdi-close'
         },
         /*{
             title: 'dashboard',

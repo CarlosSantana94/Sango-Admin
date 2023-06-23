@@ -32,16 +32,7 @@
                 </ion-list>
             </ion-content>
 
-            <ion-footer class="ion-no-border">
-                <div class="developed_by d-flex" (click)="developed_by()" *ngIf="config.showBuyPromt">
-                    <ion-menu-toggle auto-hide="false" class="d-flex">
-                        <h2>{{"developed_by" | translate}}</h2>
-                        <div class="img_box">
-                            <img src="assets/imgs/opus.png">
-                        </div>
-                    </ion-menu-toggle>
-                </div>
-            </ion-footer>
+
         </ion-menu>
         <ion-router-outlet id="main-content"></ion-router-outlet>
     </ion-split-pane>
