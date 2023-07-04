@@ -38,7 +38,11 @@ ion-header {
       }
 
       &.segment-button-checked {
-        color: var(--primary) !important;
+        color: #001e7f !important;
+        background: #ffc409 !important;
+        border-radius: 10px !important;
+        padding-top: 10px;
+        padding-bottom: 10px;
 
         &::before {
           width: 50px;
@@ -199,3 +203,8 @@ ion-header {
     }
   }
 }
+
+ion-col {
+  text-align: center;
+}
+

@@ -22,6 +22,14 @@ export class PedidosPage implements OnInit {
     cuantosPedidos = 0;
     cuantosProximos = 0;
 
+    cuantosHoyRecoleccion = 0;
+    cuantosAtrasadosRecoleccion = 0;
+    cuantosFuturosRecoleccion = 0;
+
+    cuantosHoyEntrega = 0;
+    cuantosAtrasadosEntrega = 0;
+    cuantosFuturosEntrega = 0;
+
     proximos: any = [
         {
             direccion: {
@@ -63,6 +71,7 @@ export class PedidosPage implements OnInit {
         }
     ];
     hoy: any;
+    btnSeleccionado: string;
 
     constructor(private route: Router,
                 private rest: RESTService,
@@ -70,7 +79,7 @@ export class PedidosPage implements OnInit {
     }
 
     ngOnInit() {
-
+        this.btnSeleccionado = 'hoy';
         this.pedidos = [];
         this.proximos = [];
         this.pedidosEnTienda = [];
@@ -93,11 +102,11 @@ export class PedidosPage implements OnInit {
             this.cuantosPedidosParaEntregar = p.length;
         });
 
-       /* this.rest.obtenerTodosLosPedidosPendientesRepartidor('3022-11-04').subscribe(p => {
-            this.proximos = p;
-            console.log(p);
-            this.cuantosProximos = p.length;
-        });*/
+        /* this.rest.obtenerTodosLosPedidosPendientesRepartidor('3022-11-04').subscribe(p => {
+             this.proximos = p;
+             console.log(p);
+             this.cuantosProximos = p.length;
+         });*/
     }
 
     async segmentChanged() {
@@ -115,4 +124,7 @@ export class PedidosPage implements OnInit {
     }
 
 
+    seleccionarTiempo(tiempo: string) {
+        this.btnSeleccionado = tiempo;
+    }
 }

@@ -5,7 +5,8 @@
         </ion-buttons>
         <ion-title> Pedidos {{hoy}}</ion-title>
     </ion-toolbar>
-    <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment" lines="none" style="background: #bababa !important;">
+    <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment" lines="none"
+                 style="background: #f3f3f3 !important;">
         <ion-segment-button value="0">
             <ion-label>
                 {{cuantosPedidos}}  Recoleccion
@@ -25,6 +26,36 @@
 </ion-header>
 
 <ion-content class="bg_color">
+    <ion-grid style="align-content: center" *ngIf="segment!=1">
+        <ion-row>
+            <ion-col size="4">
+                <ion-button expand="block" color="warning" *ngIf="btnSeleccionado==='hoy'">
+                    Hoy
+                </ion-button>
+                <ion-button expand="block" *ngIf="btnSeleccionado!=='hoy'" (click)="seleccionarTiempo('hoy')">
+                    Hoy
+                </ion-button>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button expand="block" color="warning" *ngIf="btnSeleccionado==='atrasados'">
+                    Atrasados
+                </ion-button>
+                <ion-button expand="block" *ngIf="btnSeleccionado!=='atrasados'"
+                            (click)="seleccionarTiempo('atrasados')">
+                    Atrasados
+                </ion-button>
+            </ion-col>
+            <ion-col size="4">
+                <ion-button expand="block" color="warning" *ngIf="btnSeleccionado==='futuros'">
+                    Futuros
+                </ion-button>
+                <ion-button expand="block" *ngIf="btnSeleccionado!=='futuros'" (click)="seleccionarTiempo('futuros')">
+                    Futuros
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
     <div class="order-list">
         <ion-slides #slides (ionSlideDidChange)="slideChanged()">
             <ion-slide>
