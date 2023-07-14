@@ -9,6 +9,13 @@
           "sango-admin"
         ]
       }
+    },
+    "sango-tintorerias": {
+      "hosting": {
+        "admin": [
+          "sango-admin"
+        ]
+      }
     }
   },
   "etags": {}

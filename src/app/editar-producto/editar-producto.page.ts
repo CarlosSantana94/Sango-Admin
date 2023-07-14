@@ -93,11 +93,13 @@ export class EditarProductoPage implements OnInit {
         this.nuevaPrenda.opcionId = this.opcionSeleccionada;
 
         console.log(this.nuevaPrenda);
+
         this.rest.postSubOpciones(this.nuevaPrenda).subscribe(resp => {
             console.log(resp);
             this.dismissLoader();
             this.route.navigate(['./items']);
         });
+
     }
 
     requestReadPermission() {

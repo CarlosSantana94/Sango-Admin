@@ -11,6 +11,7 @@ export class SigninPage implements OnInit {
     username: any;
     password: any;
     servidor: any;
+    apiVersion: any;
 
     constructor(private navCtrl: NavController,
                 private rest: RESTService) {
@@ -20,6 +21,7 @@ export class SigninPage implements OnInit {
         this.rest.getHealth().subscribe(h => {
             console.log(h);
             this.servidor = h.isUp;
+            this.apiVersion = h.version;
 
             if (h.is && localStorage.getItem('uid') !== null) {
                 this.navCtrl.navigateRoot(['./tabs']);
