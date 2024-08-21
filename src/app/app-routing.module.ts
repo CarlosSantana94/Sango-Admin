@@ -62,34 +62,43 @@ const routes: Routes = [
         path: 'mapa',
         loadChildren: () => import('./mapa/mapa.module').then(m => m.MapaPageModule)
     },
-  {
-    path: 'pedidos',
-    loadChildren: () => import('./pedidos/pedidos.module').then( m => m.PedidosPageModule)
-  },
-  {
-    path: 'order-info',
-    loadChildren: () => import('./order-info/order-info.module').then( m => m.OrderInfoPageModule)
-  },
-  {
-    path: 'nuevo-producto',
-    loadChildren: () => import('./nuevo-producto/nuevo-producto.module').then( m => m.NuevoProductoPageModule)
-  },
-  {
-    path: 'nueva-sub-seccion',
-    loadChildren: () => import('./nueva-sub-seccion/nueva-sub-seccion.module').then( m => m.NuevaSubSeccionPageModule)
-  },
-  {
-    path: 'editar-producto',
-    loadChildren: () => import('./editar-producto/editar-producto.module').then( m => m.EditarProductoPageModule)
-  },
-  {
-    path: 'principal',
-    loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule)
-  },
-  {
-    path: 'solicitud-cancelaciones',
-    loadChildren: () => import('./solicitud-cancelaciones/solicitud-cancelaciones.module').then( m => m.SolicitudCancelacionesPageModule)
+    {
+        path: 'pedidos',
+        loadChildren: () => import('./pedidos/pedidos.module').then(m => m.PedidosPageModule)
+    },
+    {
+        path: 'order-info',
+        loadChildren: () => import('./order-info/order-info.module').then(m => m.OrderInfoPageModule)
+    },
+    {
+        path: 'nuevo-producto',
+        loadChildren: () => import('./nuevo-producto/nuevo-producto.module').then(m => m.NuevoProductoPageModule)
+    },
+    {
+        path: 'nueva-sub-seccion',
+        loadChildren: () => import('./nueva-sub-seccion/nueva-sub-seccion.module').then(m => m.NuevaSubSeccionPageModule)
+    },
+    {
+        path: 'editar-producto',
+        loadChildren: () => import('./editar-producto/editar-producto.module').then(m => m.EditarProductoPageModule)
+    },
+    {
+        path: 'principal',
+        loadChildren: () => import('./principal/principal.module').then(m => m.PrincipalPageModule)
+    },
+    {
+        path: 'solicitud-cancelaciones',
+        loadChildren: () => import('./solicitud-cancelaciones/solicitud-cancelaciones.module').then(m => m.SolicitudCancelacionesPageModule)
+    },
+    {
+        path: 'aviso-de-privacidad',
+        loadChildren: () => import('./aviso-de-privacidad/aviso-de-privacidad.module').then(m => m.AvisoDePrivacidadPageModule)
+    },  {
+    path: 'terminos-ycondiciones',
+    loadChildren: () => import('./terminos-ycondiciones/terminos-ycondiciones.module').then( m => m.TerminosYCondicionesPageModule)
   }
+
+
 ];
 
 @NgModule({

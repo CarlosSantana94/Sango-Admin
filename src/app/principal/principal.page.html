@@ -5,62 +5,65 @@
         </ion-buttons>
         <ion-title>SANGO</ion-title>
         <ion-buttons slot="end">
-            <ion-button (click)="recargar()"><ion-icon name="reload-outline"></ion-icon> </ion-button>
+            <ion-button (click)="recargar()">
+                <ion-icon name="reload-outline"></ion-icon>
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
     <ion-grid>
         <ion-row>
+            <!-- Sección Recolección -->
             <ion-col>
                 <ion-card>
                     <ion-card-header>
                         <ion-card-title>{{porRecolectar}}</ion-card-title>
-                        <ion-card-subtitle>Recoleccion</ion-card-subtitle>
+                        <ion-card-subtitle>Recolección</ion-card-subtitle>
                     </ion-card-header>
-
                     <ion-card-content>
-                        <ion-row style="background-color: #ffc409">
+                        <ion-row class="recolectar-atrasados">
                             <ion-icon name="timer-outline"></ion-icon>
                             Atrasados: {{recolectarAtrasados}}
                         </ion-row>
-                        <ion-row style="background-color: #09ff42">
+                        <ion-row class="recolectar-hoy">
                             <ion-icon name="today-outline"></ion-icon>
                             Hoy: {{recolectarHoy}}
                         </ion-row>
-                        <ion-row style="background-color: #38b0fd">
+                        <ion-row class="recolectar-futuros">
                             <ion-icon name="arrow-redo-outline"></ion-icon>
                             Futuros: {{recolectarFuturos}}
                         </ion-row>
-
                     </ion-card-content>
                 </ion-card>
             </ion-col>
+
+            <!-- Sección Entrega -->
             <ion-col>
                 <ion-card>
                     <ion-card-header>
                         <ion-card-title>{{porEntregar}}</ion-card-title>
                         <ion-card-subtitle>Entrega</ion-card-subtitle>
                     </ion-card-header>
-
                     <ion-card-content>
-                        <ion-row style="background-color: #ffc409">
+                        <ion-row class="recolectar-atrasados">
                             <ion-icon name="timer-outline"></ion-icon>
                             Atrasados: {{entregarAtrasados}}
                         </ion-row>
-                        <ion-row style="background-color: #09ff42">
+                        <ion-row class="recolectar-hoy">
                             <ion-icon name="today-outline"></ion-icon>
                             Hoy: {{entregarHoy}}
                         </ion-row>
-                        <ion-row style="background-color: #38b0fd">
+                        <ion-row class="recolectar-futuros">
                             <ion-icon name="arrow-redo-outline"></ion-icon>
                             Futuros: {{entregarFuturos}}
                         </ion-row>
-
                     </ion-card-content>
                 </ion-card>
             </ion-col>
+
+            <!-- Sección En Sucursal -->
             <ion-col>
                 <ion-card>
                     <ion-card-header>
@@ -69,36 +72,40 @@
                     </ion-card-header>
                 </ion-card>
             </ion-col>
+
+            <!-- Sección Por Cancelar -->
             <ion-col>
-                <ion-card *ngIf="solicitudCancelacion>0" (click)="irASolicitudesDeCancelacion()" style="background-color: #f02f30; color: white">
+                <ion-card *ngIf="solicitudCancelacion > 0" (click)="irASolicitudesDeCancelacion()" class="card-cancelar">
                     <ion-card-header>
                         <ion-card-title>{{solicitudCancelacion}}</ion-card-title>
-                        <ion-card-subtitle style="color: white">Por Cancelar</ion-card-subtitle>
+                        <ion-card-subtitle>Por Cancelar</ion-card-subtitle>
                     </ion-card-header>
                 </ion-card>
-                <ion-card *ngIf="solicitudCancelacion==0">
+                <ion-card *ngIf="solicitudCancelacion == 0">
                     <ion-card-header>
                         <ion-card-title>{{solicitudCancelacion}}</ion-card-title>
                         <ion-card-subtitle>Por Cancelar</ion-card-subtitle>
                     </ion-card-header>
                 </ion-card>
             </ion-col>
+
+            <!-- Sección Cancelados -->
             <ion-col>
                 <ion-card>
                     <ion-card-header>
                         <ion-card-title>{{canceladosHistorico}}</ion-card-title>
                         <ion-card-subtitle>Cancelados</ion-card-subtitle>
                     </ion-card-header>
-
                 </ion-card>
             </ion-col>
+
+            <!-- Sección Finalizados -->
             <ion-col>
                 <ion-card>
                     <ion-card-header>
                         <ion-card-title>{{finalizados}}</ion-card-title>
                         <ion-card-subtitle>Finalizados</ion-card-subtitle>
                     </ion-card-header>
-
                 </ion-card>
             </ion-col>
 

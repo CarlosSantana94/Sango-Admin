@@ -65,6 +65,16 @@ export class AppComponent implements OnInit {
             title: 'Cerrar Sesión',
             url: '/signin',
             icon: 'zmdi zmdi-power'
+        },
+        {
+            title: 'Aviso De Privacidad',
+            url: '/aviso-de-privacidad',
+            icon: 'zmdi zmdi-attachment-alt'
+        },
+        {
+            title: 'Terminos Y Condiciones',
+            url: '/terminos-ycondiciones',
+            icon: 'zmdi zmdi-attachment-alt'
         }
     ];
 

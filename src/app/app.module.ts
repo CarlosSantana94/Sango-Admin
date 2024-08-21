@@ -20,13 +20,14 @@ import {environment} from '../environments/environment';
 import {DatePipe} from '@angular/common';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {HttpInterceptorService} from './http-interceptor.service';
+import { AvisoDePrivacidadPipe } from './aviso-de-privacidad.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, AvisoDePrivacidadPipe],
     entryComponents: [],
     imports: [
         BrowserModule,

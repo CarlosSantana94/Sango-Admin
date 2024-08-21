@@ -20,15 +20,16 @@ export class ItemsPage implements OnInit {
     constructor(private route: Router,
                 private rest: RESTService,
                 private loadingCtrl: LoadingController) {
-    }
-
-    ngOnInit() {
         this.simpleLoader();
         this.rest.getProductos().subscribe(data => {
             console.log(data);
             this.productos = data;
-            this.dismissLoader();
+            loadingCtrl.dismiss();
         });
+    }
+
+    ngOnInit() {
+
 
     }
 
