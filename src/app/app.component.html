@@ -1,6 +1,6 @@
 <ion-app [dir]="rtlSide">
     <ion-split-pane contentId="main-content">
-        <ion-menu contentId="main-content" type="overlay">
+        <ion-menu contentId="main-content" type="overlay" *ngIf="islogged()">
             <ion-header>
                 <ion-menu-toggle auto-hide="false">
                     <div class="banner">
@@ -10,9 +10,6 @@
                         <div class="info  d-flex">
                             <div class="img_box center_img">
                                 <img src="assets/imgs/logo_sango.png" class="crop_img">
-                            </div>
-                            <div class="text_box">
-                                <h2>SANGO ADMIN</h2>
                             </div>
                         </div>
                     </div>

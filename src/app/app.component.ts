@@ -128,6 +128,8 @@ export class AppComponent implements OnInit {
         if (path !== undefined) {
             this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
         }
+
+        this.islogged();
     }
 
     buyappalert() {
@@ -136,5 +138,13 @@ export class AppComponent implements OnInit {
 
     developed_by() {
         // window.open('https://opuslab.works/', '_system', 'location=no');
+    }
+
+    islogged(): boolean {
+        if (sessionStorage.getItem('lg') === '1') {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

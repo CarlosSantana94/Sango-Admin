@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "set NODE_OPTIONS=--openssl-legacy-provider && ng",
     "start": "set NODE_OPTIONS=--openssl-legacy-provider && ionic serve -lab -p 8111",
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider && ng build",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && ng build && firebase deploy --only hosting",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

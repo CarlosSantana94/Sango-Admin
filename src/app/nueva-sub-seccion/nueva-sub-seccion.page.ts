@@ -46,7 +46,6 @@ export class NuevaSubSeccionPage implements OnInit {
     }
 
 
-
     requestReadPermission() {
         // no callbacks required as this opens a popup which returns async
         this.requestReadPermission();

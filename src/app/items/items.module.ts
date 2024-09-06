@@ -1,22 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
-	 
-import { IonicModule } from '@ionic/angular';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {TranslateModule} from '@ngx-translate/core';
+import {IonicModule} from '@ionic/angular';
 
-import { ItemsPageRoutingModule } from './items-routing.module';
+import {ItemsPageRoutingModule} from './items-routing.module';
 
-import { ItemsPage } from './items.page';
+import {ItemsPage} from './items.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-	TranslateModule,
-    ItemsPageRoutingModule
-  ],
-  declarations: [ItemsPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        TranslateModule,
+        ItemsPageRoutingModule,
+    ],
+    declarations: [ItemsPage]
 })
-export class ItemsPageModule {}
+export class ItemsPageModule {
+}

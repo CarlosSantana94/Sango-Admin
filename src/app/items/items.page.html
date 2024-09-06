@@ -1,47 +1,91 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Productos</ion-title>
-        <ion-buttons slot="end">
-            <ion-button (click)="agregarProducto()">+</ion-button>
-        </ion-buttons>
-    </ion-toolbar>
-    <!--<ion-select mode="ios" interface="popover" [(ngModel)]="categories">
-        <ion-select-option value="all_categories">All Categories</ion-select-option>
-        <ion-select-option value="n64">Kids Categories</ion-select-option>
-    </ion-select>-->
-</ion-header>
+<div class="container">
+    <div class="header-row" style="display: flex; justify-content: space-between; align-items: center;">
+        <h1>Listado de Productos</h1>
+        <button (click)="agregarProducto()" class="add-product-button" style="margin-left: auto;">
+            + Agregar Producto
+        </button>
+    </div>
+    <!-- Search bar -->
+    <input
+            type="text"
+            placeholder="Buscar..."
+            [(ngModel)]="searchQuery"
+            (input)="filterData()"
+            class="search-bar"
+    />
 
-<ion-content class="bg_color" fullscreen>
-    <ion-list lines="none">
-        <ion-item-sliding *ngFor="let i of productos">
-            <ion-item-options side="start">
-                <ion-item-option color="warning" style="border-radius: 10px; margin: 2px;" (click)="editarArticulo(i)">Editar</ion-item-option>
-            </ion-item-options>
-            <ion-item (click)="editItem(i.id,i.servicioId,i.servicio)"  style="background-color: #dbdbdb; border-radius: 20px">
-                <div class="item_inner d-flex" (click)="abrirEditorDeProducto(i)">
-                    <div class="img_box center_img">
-                        <img *ngIf="i.img==='' || i.img===undefined" src="assets/imgs/logo_sango.png" class="crop_img">
-                        <img *ngIf="i.img!=='' || i.img!==undefined" [src]="i.img">
-                    </div>
-                    <div class="text_box">
-                        <h2 class="d-flex" style="color: #2e2e2e">{{i.nombre}}</h2>
-                        <h3 class="d-flex" style="color: #14990A">$ {{i.precio}} <span class="end ion-text-end"  *ngIf="i.porMetro">x Metro</span></h3>
-                        <h3 class="d-flex" style="font-size: small;color: #318080">{{i.servicio}} <ion-icon name="chevron-forward-outline"></ion-icon> <span style="color: #4c8dff;font-size: small"> {{i.servicioPadre}}</span></h3>
+    <!-- Filter buttons for parents -->
+    <div class="filter-buttons">
+        <button style="margin-bottom: 3px"
+                *ngFor="let parent of parents"
+                (click)="filterByParent(parent)"
+                [class.active]="selectedParent === parent">
+            {{ parent }}
+        </button>
+        <!-- New button to reset filters and show all data -->
+        <button
+                (click)="showAllData()"
+                [class.active]="!selectedParent">
+            Show All
+        </button>
+    </div>
+    <!-- Table for product data -->
+    <div class="table-container">
+        <table class="product-table">
+            <thead>
+            <tr>
+                <th>Servicio</th>
+                <th>Categoria</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Descriptción</th>
+                <th>Editar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of filteredProducts">
+                <td>{{ item.servicioNombre }}</td>
+                <!-- Display opcionImg as a thumbnail with click event -->
+                <td>
+                    <img
+                            [src]="item.opcionImg"
+                            alt="{{ item.opcionNombre }}"
+                            class="thumbnail"
+                            (click)="openImageViewer(item.opcionImg)"
+                    />
+                    {{ item.opcionNombre }}
+                </td>
+                <!-- Display subopcionImg as a thumbnail with click event -->
+                <td>
+                    <img
+                            [src]="item.subopcionImg"
+                            alt="{{ item.subopcionNombre }}"
+                            class="thumbnail"
+                            (click)="openImageViewer(item.subopcionImg)"
+                    />
+                    {{ item.subopcionNombre }}
+                </td>
 
-                    </div>
-                </div>
-            </ion-item>
-        </ion-item-sliding>
+                <td>{{ item.subopcionPrecio | currency }}</td>
+                <td>{{ item.subopcionDescripcion || 'N/A' }}</td>
+                <td>
+                    <button (click)="editarArticulo(item.subopcionId)" class="edit-button">
+                        <ion-icon name="create-outline"></ion-icon>
+                    </button>
+                </td> <!-- Edit button with pencil icon -->
+            </tr>
+            </tbody>
+        </table>
+    </div>
 
-
-    </ion-list>
-
-    <!--<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="additems()">
-            +
-        </ion-fab-button>
-    </ion-fab>-->
-</ion-content>
+    <!-- Modal for image viewer -->
+    <div
+            class="image-viewer"
+            *ngIf="isImageViewerOpen"
+            (click)="closeImageViewer()"
+    >
+        <div class="image-viewer-content" (click)="$event.stopPropagation()">
+            <img [src]="currentImage" alt="Large view"/>
+        </div>
+    </div>
+</div>
