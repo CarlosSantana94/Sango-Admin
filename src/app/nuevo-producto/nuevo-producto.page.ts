@@ -79,7 +79,11 @@ export class NuevoProductoPage implements OnInit {
         this.rest.postSubOpciones(this.nuevaPrenda).subscribe(resp => {
             console.log(resp);
             this.dismissLoader();
-            window.location.reload();
+
+            this.imageSelected = '';
+            this.nuevaPrenda.nombre = '';
+            this.nuevaPrenda.precio = 0;
+            // window.location.reload();
             //this.route.navigate(['./items']);
         });
     }
