@@ -57,6 +57,10 @@ export class AppComponent implements OnInit {
          },*/
 
         {
+            title: 'Usuarios',
+            url: '/usuarios',
+            icon: 'zmdi zmdi-accounts-list-alt'
+        }, {
             title: 'Mensajes',
             url: '/messages',
             icon: 'zmdi zmdi-comments'

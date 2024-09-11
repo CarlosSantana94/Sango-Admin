@@ -96,6 +96,10 @@ const routes: Routes = [
     },  {
     path: 'terminos-ycondiciones',
     loadChildren: () => import('./terminos-ycondiciones/terminos-ycondiciones.module').then( m => m.TerminosYCondicionesPageModule)
+  },
+  {
+    path: 'usuarios',
+    loadChildren: () => import('./usuarios/usuarios.module').then( m => m.UsuariosPageModule)
   }
 
 

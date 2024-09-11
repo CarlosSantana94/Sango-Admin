@@ -90,4 +90,8 @@ export class RESTService {
     getHealth(): any {
         return this.http.get(environment.url + 'health');
     }
+
+    getUsuarios(): any {
+        return this.http.get(environment.url + 'usuarios');
+    }
 }

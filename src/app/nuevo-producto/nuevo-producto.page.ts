@@ -30,7 +30,6 @@ export class NuevoProductoPage implements OnInit {
     opcionSeleccionadaId: any;
     usarMismaImagenQuePadre: boolean;
      imageSelected: string;
-    mismoNombre: boolean;
 
     constructor(private rest: RESTService,
                 private route: Router,

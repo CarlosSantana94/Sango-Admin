@@ -1,0 +1,28 @@
+ion-header {
+  --background: #3880ff;
+  --color: #fff;
+}
+
+ion-item {
+  --background: #f9f9f9;
+  --border-color: #e0e0e0;
+  border-radius: 10px;
+  margin: 10px 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ion-avatar img {
+  border-radius: 50%;
+  border: 2px solid #3880ff;
+}
+
+ion-label h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+ion-label p {
+  font-size: 0.9rem;
+  color: #666;
+}
