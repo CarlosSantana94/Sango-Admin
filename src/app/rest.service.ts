@@ -94,4 +94,8 @@ export class RESTService {
     getUsuarios(): any {
         return this.http.get(environment.url + 'usuarios');
     }
+
+    postActualizarUsuario(usuario): any {
+        return this.http.post(environment.url + 'usuario' , usuario);
+    }
 }

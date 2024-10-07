@@ -26,3 +26,8 @@ ion-label p {
   font-size: 0.9rem;
   color: #666;
 }
+ion-toggle {
+  --handle-background: #ff0404;
+  --background: #dcdcdc;
+  --background-checked: #38ff53;
+}

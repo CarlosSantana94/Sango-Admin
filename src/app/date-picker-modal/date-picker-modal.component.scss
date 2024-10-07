@@ -1,0 +1,37 @@
+.custom-modal-content {
+  --background: var(--ion-color-light); /* Fondo del modal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Asegura que el contenido ocupe toda la altura del modal */
+}
+
+.date-picker-card {
+  width: 90%; /* Ajusta el ancho del modal */
+  max-width: 400px; /* Limita el ancho máximo */
+  margin: 0 auto; /* Centra el card */
+  --background: var(--ion-color-white); /* Fondo del card */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+  border-radius: 12px; /* Bordes redondeados */
+}
+
+.custom-datetime {
+  --color: var(--ion-color-dark); /* Color del texto */
+  --background: transparent; /* Fondo transparente para el datetime */
+  --padding-start: 0;
+  --padding-end: 0;
+  font-size: 1.1rem; /* Tamaño del texto */
+}
+
+.footer-toolbar {
+  --background: var(--ion-color-light);
+  padding-bottom: 10px;
+  border-top: 1px solid var(--ion-color-medium); /* Línea superior para separar */
+}
+
+ion-modal {
+  --border-radius: 20px;
+  --width: 90%;
+  --max-width: 400px;
+  --box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+}

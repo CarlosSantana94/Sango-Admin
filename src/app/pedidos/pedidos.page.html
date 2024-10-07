@@ -3,261 +3,97 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title> Pedidos {{hoy}}</ion-title>
+        <ion-title>Pedidos hasta:{{hoy}}</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="openDatePicker()">
+                <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
-    <ion-segment (ionChange)="segmentChanged()" [(ngModel)]="segment" lines="none"
-                 style="background: #f3f3f3 !important;">
+    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged()">
         <ion-segment-button value="0">
-            <ion-label>
-                {{cuantosPedidos}}  Recoleccion
-            </ion-label>
+            <ion-label>Recolección ({{cuantosPedidos}})</ion-label>
         </ion-segment-button>
         <ion-segment-button value="1">
-            <ion-label>
-                {{cuantosPedidosEnTienda}} Tienda
-            </ion-label>
+            <ion-label>Tienda ({{cuantosPedidosEnTienda}})</ion-label>
         </ion-segment-button>
         <ion-segment-button value="2">
-            <ion-label>
-                {{cuantosPedidosParaEntregar}}   Entrega
-            </ion-label>
+            <ion-label>Entrega ({{cuantosPedidosParaEntregar}})</ion-label>
         </ion-segment-button>
     </ion-segment>
 </ion-header>
 
-<ion-content class="bg_color">
-    <ion-grid style="align-content: center" *ngIf="segment!=1">
-        <ion-row>
+
+<ion-content class="ion-padding">
+    <!-- Botones para filtrar pedidos -->
+    <ion-grid *ngIf="segment !== '1'">
+        <ion-row class="botones-seleccion">
             <ion-col size="4">
-                <ion-button expand="block" color="warning" *ngIf="btnSeleccionado==='hoy'">
-                    Hoy
-                </ion-button>
-                <ion-button expand="block" *ngIf="btnSeleccionado!=='hoy'" (click)="seleccionarTiempo('hoy')">
+                <ion-button expand="block" [color]="btnSeleccionado === 'hoy' ? 'primary' : 'light'" (click)="seleccionarTiempo('hoy')">
                     Hoy
                 </ion-button>
             </ion-col>
             <ion-col size="4">
-                <ion-button expand="block" color="warning" *ngIf="btnSeleccionado==='atrasados'">
-                    Atrasados
-                </ion-button>
-                <ion-button expand="block" *ngIf="btnSeleccionado!=='atrasados'"
-                            (click)="seleccionarTiempo('atrasados')">
+                <ion-button expand="block" [color]="btnSeleccionado === 'atrasados' ? 'primary' : 'light'" (click)="seleccionarTiempo('atrasados')">
                     Atrasados
                 </ion-button>
             </ion-col>
             <ion-col size="4">
-                <ion-button expand="block" color="warning" *ngIf="btnSeleccionado==='futuros'">
-                    Futuros
-                </ion-button>
-                <ion-button expand="block" *ngIf="btnSeleccionado!=='futuros'" (click)="seleccionarTiempo('futuros')">
+                <ion-button expand="block" [color]="btnSeleccionado === 'futuros' ? 'primary' : 'light'" (click)="seleccionarTiempo('futuros')">
                     Futuros
                 </ion-button>
             </ion-col>
         </ion-row>
-
     </ion-grid>
-    <div class="order-list">
-        <ion-slides #slides (ionSlideDidChange)="slideChanged()">
-            <ion-slide>
-                <ion-list lines="none">
-                    <ion-item *ngFor="let p of pedidos">
-                        <div class="item_inner d-flex">
-                            <ion-avatar item-start>
-                                <ion-icon style="color: orangered" name="radio-button-on-outline"
-                                          *ngIf="p.estado==='Creada'"></ion-icon>
-                            </ion-avatar>
-                            <div class="contant">
-                                <h2 class="d-flex">
-                                    <span class="text" *ngIf="p.estado==='Creada'">
-                                        Recoleccion
-                                        <small>
-                                            Orden: {{p.id}}
-                                        </small>
 
-                                        <small>
-                                            {{p.recoleccion | date: 'dd/MM'}}
-                                        </small>
-                                    </span>
-                                    <span class="text" *ngIf="p.estado==='Terminado'">
-                                        Entrega
-                                        <small>
-                                            Orden: {{p.id}}
-                                        </small>
-                                    </span>
-                                    <span class="end">
-                                        <ion-button size="large" expand="block" (click)="orderDetail(p.id)"
-                                                    class="btn end">Detalles <ion-icon
-                                                name="newspaper-outline"></ion-icon></ion-button>
-                                    </span>
-                                </h2>
-                                <h3 class="d-flex">
-                                    <span class="text">
-                                        <small>
-                                            Total
-                                        </small>
-                                        <strong>
-                                            <p>${{p.total}}</p>
-                                        </strong>
-                                    </span>
-                                    <span class="end text" *ngIf="p.formaDePago =='tarjeta'">
-                                        <strong>
-                                            <p style="color: #4b8d0b">Pagada <ion-icon
-                                                    name="bag-check-outline"></ion-icon></p>
-                                        </strong>
-                                    </span><span class="end text" *ngIf="p.formaDePago !='tarjeta'">
-                                        <small>
-                                           El cliente paga
-                                        </small>
-                                        <strong>
-                                            <p>{{p.metodoDePago}} al {{p.cuandoEfectivo}}</p>
-                                        </strong>
-                                    </span>
-                                </h3>
-                                <h3 class="d-flex">
-                                    <span class="text">
-                                        <small>
-                                            Direccion
-                                        </small>
-                                        <strong>
-                                            <p>{{p.direccion}}</p>
-                                        </strong>
-                                    </span>
-                                </h3>
-                            </div>
-                        </div>
-                    </ion-item>
-                </ion-list>
-            </ion-slide>
+    <!-- Lista de pedidos por segmento -->
+    <ion-list *ngIf="segment === '0' && pedidos.length > 0">
+        <ion-item *ngFor="let p of pedidos"  lines="full">
+            <ion-label [ngClass]="getBackgroundClass(p.estado)">
+                <h2>Recolección - Orden: {{p.id}}</h2>
+                <p>Dirección: {{p.direccion}}</p>
+                <p>Total: ${{p.total}}</p>
+                <p><strong>Fecha de recolección:</strong> {{p.recoleccion | date: 'dd/MM/yyyy'}}</p>
+                <p><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
+            </ion-label>
+            <ion-button fill="outline" slot="end" (click)="orderDetail(p.id)">Detalles</ion-button>
+        </ion-item>
+    </ion-list>
 
-            <ion-slide>
+    <ion-list *ngIf="segment === '1' && pedidosEnTienda.length > 0">
+        <ion-item *ngFor="let p of pedidosEnTienda"  lines="full">
+            <ion-label [ngClass]="getBackgroundClass(p.estado)">
+                <h2>Tienda - Orden: {{p.id}}</h2>
+                <p>Dirección: {{p.direccion}}</p>
+                <p>Total: ${{p.total}}</p>
+                <p><strong>Fecha de recolección:</strong> {{p.recoleccion | date: 'dd/MM/yyyy'}}</p>
+                <p><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
+            </ion-label>
+            <ion-button fill="outline" slot="end" (click)="orderDetail(p.id)">Detalles</ion-button>
+        </ion-item>
+    </ion-list>
 
-                <ion-list lines="none">
-                    <ion-item *ngFor="let p of pedidosEnTienda">
-                        <div class="item_inner d-flex">
-                            <ion-avatar item-start>
-                                <ion-icon style="color: #99ff00" name="radio-button-on-outline"
-                                          *ngIf="p.estado==='Recolectada'"></ion-icon>
-                            </ion-avatar>
-                            <div class="contant">
-                                <h2 class="d-flex">
-                                    <span class="text" *ngIf="p.estado==='Recolectada'">
-                                        Recolectada
-                                        <small>
-                                            Orden: {{p.id}}
-                                        </small>
+    <ion-list *ngIf="segment === '2' && pedidosParaEntregar.length > 0">
+        <ion-item *ngFor="let p of pedidosParaEntregar"  lines="full">
+            <ion-label [ngClass]="getBackgroundClass(p.estado)">
+                <h2>Entrega - Orden: {{p.id}}</h2>
+                <p>Dirección: {{p.direccion}}</p>
+                <p>Total: ${{p.total}}</p>
+                <p><strong>Fecha de recolección:</strong> {{p.recoleccion | date: 'dd/MM/yyyy'}}</p>
+                <p><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
+            </ion-label>
+            <ion-button fill="outline" slot="end" (click)="orderDetail(p.id)">Detalles</ion-button>
+        </ion-item>
+    </ion-list>
 
-                                        <small>
-                                            {{p.recoleccion | date: 'dd/MM'}}
-                                        </small>
-                                    </span>
-                                    <span class="end">
-                                        <ion-button size="large" expand="block" (click)="orderDetail(p.id)"
-                                                    class="btn end">Detalles <ion-icon
-                                                name="newspaper-outline"></ion-icon></ion-button>
-                                    </span>
-                                </h2>
-                                <h3 class="d-flex">
-                                    <span class="text">
-                                        <small>
-                                            Total
-                                        </small>
-                                        <strong>
-                                            <p>${{p.total}}</p>
-                                        </strong>
-                                    </span>
-                                    <span class="end text" *ngIf="p.formaDePago =='tarjeta'">
-                                        <strong>
-                                            <p style="color: #4b8d0b">Pagada <ion-icon
-                                                    name="bag-check-outline"></ion-icon></p>
-                                        </strong>
-                                    </span><span class="end text" *ngIf="p.formaDePago !='tarjeta'">
-                                        <small>
-                                           El cliente paga
-                                        </small>
-                                        <strong>
-                                            <p>{{p.metodoDePago}} al {{p.cuandoEfectivo}}</p>
-                                        </strong>
-                                    </span>
-                                </h3>
-                                <h3 class="d-flex">
-                                    <span class="text">
-                                        <small>
-                                            Direccion
-                                        </small>
-                                        <strong>
-                                            <p>{{p.direccion}}</p>
-                                        </strong>
-                                    </span>
-                                </h3>
-                            </div>
-                        </div>
-                    </ion-item>
-
-                </ion-list>
-            </ion-slide>
-            <ion-slide>
-
-                <ion-list lines="none">
-                    <ion-item *ngFor="let p of pedidosParaEntregar">
-                        <div class="item_inner d-flex">
-                            <ion-avatar item-start>
-
-                                <ion-icon style="color: dodgerblue" name="radio-button-on-outline"
-                                          *ngIf="p.estado==='Entrega'"></ion-icon>
-                            </ion-avatar>
-                            <div class="contant">
-                                <h2 class="d-flex">
-                                    <span class="text" *ngIf="p.estado==='Entrega'">
-                                        Entrega
-                                        <small>
-                                            Orden: {{p.id}}
-                                        </small>
-                                    </span>
-                                    <span class="end">
-                                        <ion-button size="large" expand="block" (click)="orderDetail(p.id)"
-                                                    class="btn end">Detalles <ion-icon
-                                                name="newspaper-outline"></ion-icon></ion-button>
-                                    </span>
-                                </h2>
-                                <h3 class="d-flex">
-                                    <span class="text">
-                                        <small>
-                                            Total
-                                        </small>
-                                        <strong>
-                                            <p>${{p.total}}</p>
-                                        </strong>
-                                    </span>
-                                    <span class="end text" *ngIf="p.formaDePago =='tarjeta'">
-                                        <strong>
-                                            <p style="color: #4b8d0b">Pagada <ion-icon
-                                                    name="bag-check-outline"></ion-icon></p>
-                                        </strong>
-                                    </span><span class="end text" *ngIf="p.formaDePago !='tarjeta'">
-                                        <small>
-                                           El cliente paga
-                                        </small>
-                                        <strong>
-                                            <p>{{p.metodoDePago}} al {{p.cuandoEfectivo}}</p>
-                                        </strong>
-                                    </span>
-                                </h3>
-                                <h3 class="d-flex">
-                                    <span class="text">
-                                        <small>
-                                            Direccion
-                                        </small>
-                                        <strong>
-                                            <p>{{p.direccion}}</p>
-                                        </strong>
-                                    </span>
-                                </h3>
-                            </div>
-                        </div>
-                    </ion-item>
-
-                </ion-list>
-            </ion-slide>
-        </ion-slides>
+    <!-- Mensajes si no hay pedidos -->
+    <div *ngIf="segment === '0' && pedidos.length === 0" class="ion-text-center">
+        <p>No hay pedidos para Recolección.</p>
+    </div>
+    <div *ngIf="segment === '1' && pedidosEnTienda.length === 0" class="ion-text-center">
+        <p>No hay pedidos en Tienda.</p>
+    </div>
+    <div *ngIf="segment === '2' && pedidosParaEntregar.length === 0" class="ion-text-center">
+        <p>No hay pedidos para Entrega.</p>
     </div>
 </ion-content>

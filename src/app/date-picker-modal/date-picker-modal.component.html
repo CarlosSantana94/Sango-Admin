@@ -1,0 +1,25 @@
+<ion-content class="ion-padding custom-modal-content">
+    <ion-card class="date-picker-card">
+        <ion-card-header>
+            <ion-card-title>Selecciona una Fecha</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-datetime
+                    [(ngModel)]="selectedDate"
+                    displayFormat="DD MMMM YYYY"
+                    pickerFormat="DD MMMM YYYY"
+                    (ionChange)="onDateChange($event)"
+                    class="custom-datetime">
+            </ion-datetime>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-footer>
+        <ion-toolbar class="footer-toolbar">
+            <ion-buttons slot="end">
+                <ion-button fill="outline" color="danger" (click)="dismiss()">Cancelar</ion-button>
+                <ion-button fill="solid" color="primary" (click)="confirm()">Aceptar</ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-footer>
+</ion-content>

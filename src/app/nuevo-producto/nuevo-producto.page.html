@@ -7,70 +7,100 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-item>
-        <ion-select placeholder="Seccion" [(ngModel)]="servicioSeleccionado"
-                    (ionChange)="cargarSubProductos(servicioSeleccionado)">
-            <ion-select-option [value]="sec.id" *ngFor="let sec of servicios">{{ sec.nombre }}</ion-select-option>
-        </ion-select>
-    </ion-item>
-    <ion-item>
-        <img style="width: 50px; height: auto;" *ngIf="opcionSeleccionadaImg!==''" [src]=" opcionSeleccionadaImg">
-        <ion-select placeholder="Sub Seccion" [(ngModel)]="opcionSeleccionada"
-                    (ionChange)="seleccionarSubOpcion(opcionSeleccionada)">
-            <ion-select-option [value]="sub" *ngFor="let sub of subServicios">
-                {{ sub.nombre }}
-            </ion-select-option>
-        </ion-select>
-    </ion-item>
-    <ion-item>
-        <ion-button (click)="nuevaSubSeccion(servicioSeleccionado)">Nueva Sub seccion</ion-button>
-    </ion-item>
-    <ion-item>
-        <ion-label position="floating" style="color: red" *ngIf="nuevaPrenda.nombre===''">Titulo</ion-label>
-            <ion-label position="floating" *ngIf="nuevaPrenda.nombre!==''">Titulo
-            </ion-label>
-            <ion-input type="name" [(ngModel)]="nuevaPrenda.nombre"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label position="floating">Descripcion
-        </ion-label>
-        <ion-input type="name" [(ngModel)]="nuevaPrenda.descripcion"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label position="floating" *ngIf="nuevaPrenda.precio<=0" style="color: red">Precio</ion-label>
-        <ion-label position="floating" *ngIf="nuevaPrenda.precio>0">Precio</ion-label>
-        <ion-input type="number" [(ngModel)]="nuevaPrenda.precio"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-checkbox slot="start" [(ngModel)]="nuevaPrenda.porMetro"></ion-checkbox>
-        Precio x Metro?
-    </ion-item>
+<ion-content class="ion-padding">
+    <ion-list>
+        <!-- Section Selector -->
+        <ion-grid>
+            <ion-row>
+                <!-- Sección Selector -->
+                <ion-col size="4">
+                    <ion-item>
+                        <ion-label>Servicio</ion-label>
+                        <ion-select placeholder="Seleccionar servicio" [(ngModel)]="servicioSeleccionado"
+                                    (ionChange)="cargarSubProductos(servicioSeleccionado)">
+                            <ion-select-option [value]="sec.id" *ngFor="let sec of servicios">{{ sec.nombre }}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
 
-    <div *ngIf="opcionSeleccionadaImg!=='' && nuevaPrenda.nombre.length>2">
-        <ion-item>
+                <!-- Sub-section Selector -->
+                <ion-col size="4">
+                    <ion-item>
+                        <img *ngIf="opcionSeleccionadaImg" [src]="opcionSeleccionadaImg" class="sub-section-img" />
+                        <ion-label>Categoría</ion-label>
+                        <ion-select placeholder="Seleccionar categoría" [(ngModel)]="opcionSeleccionada"
+                                    (ionChange)="seleccionarSubOpcion(opcionSeleccionada)">
+                            <ion-select-option [value]="sub" *ngFor="let sub of subServicios">{{ sub.nombre }}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-col>
+
+                <!-- Nueva Sub Sección Button -->
+                <ion-col size="4">
+                    <ion-item lines="none">
+                        <ion-button expand="block" (click)="nuevaSubSeccion(servicioSeleccionado)">Nueva Categoría</ion-button>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col size="4">
+                    <!-- Product Title -->
+                    <ion-item>
+                        <ion-label position="floating" [color]="nuevaPrenda.nombre === '' ? 'danger' : 'primary'">Título</ion-label>
+                        <ion-input type="text" [(ngModel)]="nuevaPrenda.nombre"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <!-- Product Price -->
+                    <ion-item>
+                        <ion-label position="floating" [color]="nuevaPrenda.precio <= 0 ? 'danger' : 'primary'">Precio</ion-label>
+                        <ion-input type="number" [(ngModel)]="nuevaPrenda.precio"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="4">
+                    <!-- Product Description -->
+                    <ion-item>
+                        <ion-label position="floating">Descripción</ion-label>
+                        <ion-input type="text" [(ngModel)]="nuevaPrenda.descripcion"></ion-input>
+                    </ion-item>
+                </ion-col>
+
+            </ion-row>
+        </ion-grid>
+
+        <!-- Price per Meter Checkbox -->
+        <ion-item lines="none">
+            <ion-label>Precio x Metro</ion-label>
+            <ion-checkbox slot="start" [(ngModel)]="nuevaPrenda.porMetro"></ion-checkbox>
+        </ion-item>
+
+        <!-- Image Selection -->
+        <ion-item lines="none" *ngIf="opcionSeleccionadaImg && nuevaPrenda.nombre.length > 2">
             <ion-checkbox slot="start" [(ngModel)]="usarMismaImagenQuePadre"></ion-checkbox>
-            Usar misma imagen que sub opcion
+            <ion-label>Usar misma imagen de categoría</ion-label>
         </ion-item>
-        <ion-item *ngIf="!usarMismaImagenQuePadre">
-            <ion-button (click)="addNewToGallery()">Seleccionar Imagen</ion-button>
-        </ion-item>
-        <ion-item *ngIf="!usarMismaImagenQuePadre">
-            <img *ngIf="imageSelected!==''" style="width: 300px; height: auto"
-                 src="{{imageSelected}}">
-        </ion-item>
-        <ion-item *ngIf="usarMismaImagenQuePadre">
-            <img style="width: 300px; height: auto"
-                 [src]="opcionSeleccionadaImg">
-        </ion-item>
-    </div>
 
-    <ion-item
-            *ngIf="nuevaPrenda.nombre!=='' && nuevaPrenda.precio >0 && servicioSeleccionado !==''
-            && opcionSeleccionadaId!==''">
-        <ion-button expand="block" color="success" (click)="guardarProducto()">Guardar Producto
-            <ion-icon style="margin-left: 10px; color: darkgreen" name="save-outline"></ion-icon>
-        </ion-button>
-    </ion-item>
+        <ion-item *ngIf="!usarMismaImagenQuePadre && nuevaPrenda.nombre.length > 2">
+            <ion-button expand="block" (click)="addNewToGallery()">Seleccionar Imagen</ion-button>
+        </ion-item>
 
+        <ion-item *ngIf="!usarMismaImagenQuePadre && imageSelected">
+            <img [src]="imageSelected" class="selected-image"/>
+        </ion-item>
+
+        <ion-item *ngIf="usarMismaImagenQuePadre && opcionSeleccionadaImg">
+            <img [src]="opcionSeleccionadaImg" class="selected-image" />
+        </ion-item>
+
+        <!-- Save Button -->
+        <ion-item lines="none" *ngIf="nuevaPrenda.nombre && nuevaPrenda.precio > 0 && servicioSeleccionado && opcionSeleccionadaId">
+            <ion-button expand="block" color="success" (click)="guardarProducto()">
+                Guardar Producto
+                <ion-icon name="save-outline" slot="end"></ion-icon>
+            </ion-button>
+        </ion-item>
+    </ion-list>
 </ion-content>

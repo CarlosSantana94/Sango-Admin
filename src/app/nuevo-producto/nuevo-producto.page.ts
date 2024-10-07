@@ -29,7 +29,7 @@ export class NuevoProductoPage implements OnInit {
     opcionSeleccionadaImgCruda: any;
     opcionSeleccionadaId: any;
     usarMismaImagenQuePadre: boolean;
-     imageSelected: string;
+    imageSelected: string;
 
     constructor(private rest: RESTService,
                 private route: Router,
@@ -82,8 +82,8 @@ export class NuevoProductoPage implements OnInit {
             this.imageSelected = '';
             this.nuevaPrenda.nombre = '';
             this.nuevaPrenda.precio = 0;
-            // window.location.reload();
-            //this.route.navigate(['./items']);
+            window.location.reload();
+            this.route.navigate(['./items']);
         });
     }
 

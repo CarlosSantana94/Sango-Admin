@@ -1,0 +1,47 @@
+ion-header {
+  --background: #3880ff;
+  --color: white;
+}
+
+ion-content {
+  --background: #f2f2f7;
+}
+
+.sub-section-img {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.selected-image {
+  width: 300px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+ion-label {
+  font-weight: 500;
+}
+
+ion-item {
+  margin-bottom: 10px;
+}
+
+ion-button {
+  margin-top: 20px;
+}
+
+ion-checkbox + ion-label {
+  margin-left: 10px;
+}
+
+.sub-section-img {
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
+
+ion-item {
+  margin: 0;
+}
