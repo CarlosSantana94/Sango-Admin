@@ -181,4 +181,54 @@ export class PedidosPage implements OnInit, OnDestroy {
         return await modal.present();
     }
 
+    getBackgroundClassForDate(fechaRecoleccion: Date): string {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Parse fechaRecoleccion and adjust it to local time
+        const recoleccionDate = new Date(fechaRecoleccion);
+        const adjustedRecoleccionDate = new Date(
+            recoleccionDate.getUTCFullYear(),
+            recoleccionDate.getUTCMonth(),
+            recoleccionDate.getUTCDate()
+        );
+
+        console.log('TODAY:', today);
+        console.log('RECOLECCION:', adjustedRecoleccionDate);
+        console.log('***********************************');
+
+        if (adjustedRecoleccionDate < today) {
+            return 'recoleccion-atrasada';
+        } else if (adjustedRecoleccionDate.getTime() === today.getTime()) {
+            return 'recoleccion-hoy';
+        } else {
+            return 'recoleccion-futura';
+        }
+    }
+
+    getBackgroundClassForDateEntrega(fechaEntrega: Date): string {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Parse fechaRecoleccion and adjust it to local time
+        const deliveryDate = new Date(fechaEntrega);
+        const adjustedEntregaDate = new Date(
+            deliveryDate.getUTCFullYear(),
+            deliveryDate.getUTCMonth(),
+            deliveryDate.getUTCDate()
+        );
+
+        console.log('TODAY:', today);
+        console.log('RECOLECCION:', adjustedEntregaDate);
+        console.log('***********************************');
+
+        if (adjustedEntregaDate > today) {
+            return 'recoleccion-atrasada';
+        } else if (adjustedEntregaDate.getTime() === today.getTime()) {
+            return 'recoleccion-hoy';
+        } else {
+            return 'recoleccion-futura';
+        }
+    }
+
 }

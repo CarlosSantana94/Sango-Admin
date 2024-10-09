@@ -45,7 +45,6 @@
             <tbody>
             <tr *ngFor="let item of filteredProducts">
                 <td>{{ item.servicioNombre }}</td>
-                <!-- Display opcionImg as a thumbnail with click event -->
                 <td>
                     <img
                             [src]="item.opcionImg"
@@ -55,7 +54,6 @@
                     />
                     {{ item.opcionNombre }}
                 </td>
-                <!-- Display subopcionImg as a thumbnail with click event -->
                 <td>
                     <img
                             [src]="item.subopcionImg"
@@ -65,27 +63,15 @@
                     />
                     {{ item.subopcionNombre }}
                 </td>
-
                 <td>{{ item.subopcionPrecio | currency }}</td>
                 <td>{{ item.subopcionDescripcion || 'N/A' }}</td>
                 <td>
                     <button (click)="editarArticulo(item.subopcionId)" class="edit-button">
                         <ion-icon name="create-outline"></ion-icon>
                     </button>
-                </td> <!-- Edit button with pencil icon -->
+                </td>
             </tr>
             </tbody>
         </table>
-    </div>
-
-    <!-- Modal for image viewer -->
-    <div
-            class="image-viewer"
-            *ngIf="isImageViewerOpen"
-            (click)="closeImageViewer()"
-    >
-        <div class="image-viewer-content" (click)="$event.stopPropagation()">
-            <img [src]="currentImage" alt="Large view"/>
-        </div>
     </div>
 </div>

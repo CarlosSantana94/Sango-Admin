@@ -25,26 +25,6 @@
 
 
 <ion-content class="ion-padding">
-    <!-- Botones para filtrar pedidos -->
-    <ion-grid *ngIf="segment !== '1'">
-        <ion-row class="botones-seleccion">
-            <ion-col size="4">
-                <ion-button expand="block" [color]="btnSeleccionado === 'hoy' ? 'primary' : 'light'" (click)="seleccionarTiempo('hoy')">
-                    Hoy
-                </ion-button>
-            </ion-col>
-            <ion-col size="4">
-                <ion-button expand="block" [color]="btnSeleccionado === 'atrasados' ? 'primary' : 'light'" (click)="seleccionarTiempo('atrasados')">
-                    Atrasados
-                </ion-button>
-            </ion-col>
-            <ion-col size="4">
-                <ion-button expand="block" [color]="btnSeleccionado === 'futuros' ? 'primary' : 'light'" (click)="seleccionarTiempo('futuros')">
-                    Futuros
-                </ion-button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
 
     <!-- Lista de pedidos por segmento -->
     <ion-list *ngIf="segment === '0' && pedidos.length > 0">
@@ -53,7 +33,7 @@
                 <h2>Recolección - Orden: {{p.id}}</h2>
                 <p>Dirección: {{p.direccion}}</p>
                 <p>Total: ${{p.total}}</p>
-                <p><strong>Fecha de recolección:</strong> {{p.recoleccion | date: 'dd/MM/yyyy'}}</p>
+                <p [ngClass]="getBackgroundClassForDate(p.recoleccion)"><strong>Fecha de recolección:</strong> {{p.recoleccion | date: 'dd/MM/yyyy'}}</p>
                 <p><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
             </ion-label>
             <ion-button fill="outline" slot="end" (click)="orderDetail(p.id)">Detalles</ion-button>
@@ -67,7 +47,7 @@
                 <p>Dirección: {{p.direccion}}</p>
                 <p>Total: ${{p.total}}</p>
                 <p><strong>Fecha de recolección:</strong> {{p.recoleccion | date: 'dd/MM/yyyy'}}</p>
-                <p><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
+                <p [ngClass]="getBackgroundClassForDateEntrega(p.entrega)"><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
             </ion-label>
             <ion-button fill="outline" slot="end" (click)="orderDetail(p.id)">Detalles</ion-button>
         </ion-item>
@@ -80,7 +60,7 @@
                 <p>Dirección: {{p.direccion}}</p>
                 <p>Total: ${{p.total}}</p>
                 <p><strong>Fecha de recolección:</strong> {{p.recoleccion | date: 'dd/MM/yyyy'}}</p>
-                <p><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
+                <p [ngClass]="getBackgroundClassForDateEntrega(p.entrega)"><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
             </ion-label>
             <ion-button fill="outline" slot="end" (click)="orderDetail(p.id)">Detalles</ion-button>
         </ion-item>
