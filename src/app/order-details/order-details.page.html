@@ -1,0 +1,93 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Resumen de la Orden</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="order">
+    <!-- Resumen de la Orden -->
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Orden #{{ order.id }}</ion-card-title>
+            <ion-button (click)="printOrder()">Imprimir</ion-button>
+            <ion-card-subtitle>Estado: {{ order.estado | titlecase }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <p><strong>Total:</strong> ${{ order.total }}</p>
+            <p><strong>Total Prendas:</strong> {{ order.totalPrendas }}</p>
+        </ion-card-content>
+    </ion-card>
+
+    <!-- Información de Envío -->
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Envío</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <p><strong>Fecha de Recolección:</strong> {{ order.envios.fechaRecoleccion | date:'dd/MM/yyyy' }}</p>
+            <p><strong>Fecha de Entrega:</strong> {{ order.envios.fechaEntrega | date:'dd/MM/yyyy' }}</p>
+        </ion-card-content>
+    </ion-card>
+
+    <!-- Dirección de Entrega -->
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>Dirección de Entrega</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <p><strong>Nombre:</strong> {{ order.direccion.nombre }}</p>
+            <p><strong>Teléfono:</strong> {{ order.direccion.tel }}</p>
+            <p><strong>Dirección:</strong> {{ order.direccion.direccion }}</p>
+            <p><strong>Indicaciones:</strong> {{ order.direccion.indicacion }}</p>
+        </ion-card-content>
+    </ion-card>
+
+    <!-- Detalles de Prendas Agrupadas por Servicio y Categoría -->
+    <ion-card *ngFor="let servicio of groupedDetails | keyvalue">
+        <ion-card-header>
+            <ion-card-title>Servicio: {{ servicio.key }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <div *ngFor="let categoria of servicio.value | keyvalue">
+                <h2>{{ categoria.key }}</h2>
+                <!-- Lista de Prendas -->
+                <ion-item *ngFor="let item of categoria.value">
+                    <ion-thumbnail slot="start">
+                        <img [src]="item.imgPrenda" />
+                    </ion-thumbnail>
+                    <ion-label>
+                        <h2>{{ item.nombrePrenda }}</h2>
+                        <p>Cantidad: {{ item.cantidad }}</p>
+                        <p>Precio Unitario: ${{ item.precioUnitario }}</p>
+                        <p>Subtotal: ${{ item.subtotal }}</p>
+                    </ion-label>
+                    <ion-item>
+                        <ion-textarea
+                                placeholder="Comentario"
+                                [(ngModel)]="item.comentario">
+                        </ion-textarea>
+                    </ion-item>
+                    <ion-button
+                            expand="block"
+                            color="primary"
+                            (click)="guardarComentario(item)">
+                        Guardar comentario
+                    </ion-button>
+                </ion-item>
+                <!-- Área de Comentarios para Cada Prenda -->
+
+            </div>
+        </ion-card-content>
+
+    </ion-card>
+
+    <!-- Botón para cambiar el estado del pedido -->
+    <div class="ion-padding">
+        <div class="ion-padding">
+            <ion-button expand="block" color="primary" (click)="cambiarEstadoPedido()">
+                Cambiar estado a: {{ obtenerSiguienteEstado(order.estadoCarrito) }}
+            </ion-button>
+        </div>
+
+    </div>
+</ion-content>
