@@ -1,79 +1,63 @@
 <ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Pedidos hasta:{{hoy}}</ion-title>
-        <ion-buttons slot="end">
-            <ion-button (click)="openDatePicker()">
-                <ion-icon slot="icon-only" name="calendar-outline"></ion-icon>
-            </ion-button>
-        </ion-buttons>
+    <ion-toolbar color="primary">
+        <ion-title>Pedidos</ion-title>
     </ion-toolbar>
-    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged()">
-        <ion-segment-button value="0">
-            <ion-label>Recolección ({{cuantosPedidos}})</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="1">
-            <ion-label>Tienda ({{cuantosPedidosEnTienda}})</ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="2">
-            <ion-label>Entrega ({{cuantosPedidosParaEntregar}})</ion-label>
+</ion-header>
+<ion-content>
+    <ion-segment [(ngModel)]="estadoSeleccionado">
+        <ion-segment-button *ngFor="let estado of estados" (click)="filtrarCarritos(estado)">
+            {{ estado }}
         </ion-segment-button>
     </ion-segment>
-</ion-header>
 
+    <ion-grid>
+        <ion-row>
+            <ion-col size="6" size-md="6" *ngFor="let carrito of carritosFiltrados">
+                <ion-card [ngClass]="{'retrasado': esRetrasado(carrito.carrito.envios.fechaRecoleccion)}">
+                    <ion-card-header>
+                        <ion-card-title>Orden #{{ carrito.carrito.id }}</ion-card-title>
+                        <ion-card-title *ngIf="esRetrasado(carrito.carrito.envios.fechaRecoleccion)">
+                            <ion-icon name="alert-circle-outline"></ion-icon>
+                            RETRASADO
+                        </ion-card-title>
+                        <ion-card-title *ngIf="!esRetrasado(carrito.carrito.envios.fechaRecoleccion)">
+                            <ion-icon name="checkmark-circle-outline"></ion-icon>
+                            A TIEMPO
+                        </ion-card-title>
+                        <ion-card-subtitle  style="color: #3535ab !important;"
+                                (click)="openMaps(carrito.carrito.direccion.lat,carrito.carrito.direccion.lng)">
+                            <ion-icon name="home-outline"></ion-icon>
+                            {{ carrito.carrito.direccion.direccion }}
+                        </ion-card-subtitle>
+                        <ion-card-subtitle style="color: black!important;">{{ carrito.carrito.direccion.nombre }}</ion-card-subtitle>
+                        <ion-card-subtitle  style="color: black!important;">{{ carrito.carrito.direccion.tel }}</ion-card-subtitle>
+                        <ion-card-subtitle  style="color: black!important;" *ngIf="carrito.carrito.formaDePago==='tarjeta'">Total:
+                            ${{ carrito.totalCarrito }}
+                        </ion-card-subtitle>
+                        <ion-card-subtitle style="color: green !important;"
+                                           *ngIf="carrito.carrito.formaDePago==='tarjeta'"
+                                           (click)="openConekta('https://panel.conekta.com/transactions/payments/'+carrito.carrito.ordenConekta)">
 
-<ion-content class="ion-padding">
+                            <ion-icon name="pricetag-outline"></ion-icon>
+                            PAGADA
+                        </ion-card-subtitle>
+                        <ion-card-subtitle style="color: orangered !important;" *ngIf="carrito.carrito.formaDePago==='efectivo'"
+                                           (click)="openConekta('https://panel.conekta.com/transactions/payments/'+carrito.carrito.ordenConekta)">
 
-    <!-- Lista de pedidos por segmento -->
-    <ion-list *ngIf="segment === '0' && pedidos.length > 0">
-        <ion-item *ngFor="let p of pedidos"  lines="full">
-            <ion-label [ngClass]="getBackgroundClass(p.estado)">
-                <h2>Recolección - Orden: {{p.id}}</h2>
-                <p>Dirección: {{p.direccion}}</p>
-                <p>Total: ${{p.total}}</p>
-                <p [ngClass]="getBackgroundClassForDate(p.recoleccion)"><strong>Fecha de recolección:</strong> {{p.recoleccion | date: 'dd/MM/yyyy'}}</p>
-                <p><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
-            </ion-label>
-            <ion-button fill="outline" slot="end" (click)="orderDetail(p.id)">Detalles</ion-button>
-        </ion-item>
-    </ion-list>
+                            <ion-icon name="cash-outline"></ion-icon>
+                            Pagar al: {{ carrito.carrito.cuandoOToken }}
+                        </ion-card-subtitle>
+                    </ion-card-header>
 
-    <ion-list *ngIf="segment === '1' && pedidosEnTienda.length > 0">
-        <ion-item *ngFor="let p of pedidosEnTienda"  lines="full">
-            <ion-label [ngClass]="getBackgroundClass(p.estado)">
-                <h2>Tienda - Orden: {{p.id}}</h2>
-                <p>Dirección: {{p.direccion}}</p>
-                <p>Total: ${{p.total}}</p>
-                <p><strong>Fecha de recolección:</strong> {{p.recoleccion | date: 'dd/MM/yyyy'}}</p>
-                <p [ngClass]="getBackgroundClassForDateEntrega(p.entrega)"><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
-            </ion-label>
-            <ion-button fill="outline" slot="end" (click)="orderDetail(p.id)">Detalles</ion-button>
-        </ion-item>
-    </ion-list>
-
-    <ion-list *ngIf="segment === '2' && pedidosParaEntregar.length > 0">
-        <ion-item *ngFor="let p of pedidosParaEntregar"  lines="full">
-            <ion-label [ngClass]="getBackgroundClass(p.estado)">
-                <h2>Entrega - Orden: {{p.id}}</h2>
-                <p>Dirección: {{p.direccion}}</p>
-                <p>Total: ${{p.total}}</p>
-                <p><strong>Fecha de recolección:</strong> {{p.recoleccion | date: 'dd/MM/yyyy'}}</p>
-                <p [ngClass]="getBackgroundClassForDateEntrega(p.entrega)"><strong>Fecha de entrega:</strong> {{p.entrega | date: 'dd/MM/yyyy'}}</p>
-            </ion-label>
-            <ion-button fill="outline" slot="end" (click)="orderDetail(p.id)">Detalles</ion-button>
-        </ion-item>
-    </ion-list>
-
-    <!-- Mensajes si no hay pedidos -->
-    <div *ngIf="segment === '0' && pedidos.length === 0" class="ion-text-center">
-        <p>No hay pedidos para Recolección.</p>
-    </div>
-    <div *ngIf="segment === '1' && pedidosEnTienda.length === 0" class="ion-text-center">
-        <p>No hay pedidos en Tienda.</p>
-    </div>
-    <div *ngIf="segment === '2' && pedidosParaEntregar.length === 0" class="ion-text-center">
-        <p>No hay pedidos para Entrega.</p>
-    </div>
+                    <ion-card-content>
+                        <p>
+                            <strong>Recolección:</strong> {{ carrito.carrito.envios.fechaRecoleccion | date:'dd/MMM/yyyy' }}
+                        </p>
+                        <p><strong>Entrega:</strong> {{ carrito.carrito.envios.fechaEntrega | date:'dd/MMM/yyyy' }}</p>
+                        <ion-button color="success" (click)="verDetalle(carrito.carrito.id)">Ver Detalle</ion-button>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

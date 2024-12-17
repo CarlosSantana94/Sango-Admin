@@ -1,128 +1,57 @@
-/* Header */
-ion-header {
-  ion-toolbar {
-    ion-title {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-    background-color: #ffffff; /* Fondo blanco para claridad */
-  }
-  ion-segment {
-    background-color: var(--ion-color-light);
-    ion-segment-button {
-      color: var(--ion-color-medium);
-      &.segment-button-checked {
-        background-color: var(--ion-color-primary);
-        color: white;
-        border-radius: 5px;
-        padding: 8px 12px;
-      }
-    }
-  }
+ion-grid {
+  padding: 0;
 }
 
-/* Botones de selección */
-.botones-seleccion {
-  margin: 10px 0;
-  ion-button {
-    border-radius: 20px;
-    --padding-start: 10px;
-    --padding-end: 10px;
-    font-size: 0.9rem;
-  }
+ion-col {
+  padding: 5px;
 }
 
-/* Estilo de las órdenes */
-.order-list {
-  ion-item {
-    border: 1px solid var(--ion-color-light);
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 12px;
-    background-color: var(--ion-color-light);
-    transition: transform 0.3s;
-  }
-  ion-item:hover {
-    transform: scale(1.02);
-  }
-  .item_inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    ion-avatar {
-      width: 35px;
-      height: 35px;
-    }
-  }
+ion-card {
+  width: 100%;
+  height: 100%;
 }
 
-ion-item {
-  --border-radius: 8px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  margin: 8px 0;
-  background: #fff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+ion-segment {
+  --background: #f2f2f2;
+  --indicator-color: #4CAF50;
+  margin: 10px;
 }
 
-ion-avatar {
-  width: 40px;
-  height: 40px;
-}
-
-ion-label h2 {
-  font-size: 1rem;
+ion-segment-button {
+  --color-checked: white;
+  --background-checked: #4CAF50;
+  --color: #4CAF50;
   font-weight: bold;
-  color: var(--ion-color-dark);
+  text-transform: uppercase;
 }
 
-ion-label p {
-  font-size: 0.9rem;
-  color: var(--ion-color-medium);
+/* Estilos para los cards */
+.retrasado ion-card {
+  --background: #ffccd5; /* Fondo rojo claro */
+  --ion-card-background: #ffccd5;
+  border-left: 6px solid #b71c1c; /* Borde rojo oscuro */
+  box-shadow: 0 4px 10px rgba(183, 28, 28, 0.4); /* Sombra roja */
+  transform: scale(1.02); /* Agranda levemente la tarjeta */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 15px 0; /* Margen superior e inferior para separación */
 }
 
-
-.botones-seleccion ion-button {
-  --border-radius: 20px;
-  font-size: 0.9rem;
+.retrasado ion-card:hover {
+  transform: scale(1.04); /* Mayor escala al pasar el ratón */
+  box-shadow: 0 6px 14px rgba(183, 28, 28, 0.5);
 }
 
-ion-item {
-  --border-radius: 8px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  margin: 8px 0;
-  background: #ffffff;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-.bg-creada {
-  background-color: rgba(255, 204, 203, 0.23); /* Rojo claro */
+.retrasado ion-card-title {
+  color: #b71c1c; /* Color de texto rojo oscuro */
+  font-weight: bold;
 }
 
-.bg-terminado {
-  background-color: rgba(208, 240, 192, 0.25); /* Verde claro */
+.retrasado ion-card-content p {
+  color: #b71c1c; /* Texto adicional en rojo */
 }
 
-.bg-recolectada {
-  background-color: rgba(204, 231, 255, 0.22); /* Azul claro */
+.retrasado ion-card-subtitle {
+  color: #d32f2f; /* Subtítulo en rojo oscuro */
+  font-weight: bold;
 }
 
-.bg-default {
-  background-color: rgba(240, 240, 240, 0.22); /* Gris claro */
-}
-
-.recoleccion-atrasada {
-  background-color: #f8d7da; // Fondo rojo claro
-  color: #721c24; // Texto rojo oscuro
-}
-
-.recoleccion-hoy {
-  background-color: #fff3cd; // Fondo naranja claro
-  color: #856404; // Texto naranja oscuro
-}
-
-.recoleccion-futura {
-  background-color: #d1ecf1; // Fondo azul claro
-  color: #0c5460; // Texto azul oscuro
-}

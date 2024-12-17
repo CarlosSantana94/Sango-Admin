@@ -5,50 +5,102 @@ import {Subscription, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
 import {RESTService} from '../rest.service';
-import {DatePickerModalComponent} from "../date-picker-modal/date-picker-modal.component";
 
-// Interfaz para los pedidos
-interface Pedido {
-    entrega: any;
-    recoleccion: any;
-    direccion: {
-        direccion: string | undefined;
-        alias: string | undefined;
-    };
-    metodoDePago: string | undefined;
-    cuandoEfectivo: string | undefined;
-    estado?: string;
-    id?: number;
-    total?: number;
+
+export type EstadoCarrito = 'CREADO' | 'EN_TIENDA' | 'TERMINADO' | 'EN_RUTA_REPARTIDOR';
+
+export interface Servicio {
+    id: number;
+    nombre: string;
 }
+
+export interface OpcionesPrenda {
+    id: number;
+    nombre: string;
+    img: string;
+    servicio: Servicio;
+}
+
+export interface Prenda {
+    id: number;
+    nombre: string;
+    precio: number;
+    descripcion: string;
+    img: string;
+    opcionesPrenda: OpcionesPrenda;
+    porMetro: boolean;
+    estado: string | null;
+}
+
+export interface ItemCarrito {
+    id: number;
+    prenda: Prenda;
+    cantidad: number;
+    estado: string;
+}
+
+export interface Direccion {
+    id: number;
+    cp: number;
+    tel: number;
+    indicacion: string;
+    alias: string;
+    direccion: string;
+    lat: number;
+    lng: number;
+    nombre: string;
+    interior: string;
+}
+
+export interface Envios {
+    id: number;
+    fechaRecoleccion: string;
+    fechaEntrega: string;
+    fechaCreado: string;
+    fechaModificado: string | null;
+    fechaOriginalRecoleccion: string;
+    motivoModificacion: string | null;
+    fechaOriginalEntrega: string;
+}
+
+export interface Carrito {
+    id: number;
+    envios: Envios;
+    estado: string;
+    fechaCreacion: string;
+    items: ItemCarrito[];
+    direccion: Direccion;
+    cuandoOToken: string;
+    formaDePago: string;
+    ordenConekta: string;
+}
+
+export interface CarritoConTotal {
+    totalCarrito: number;
+    carrito: Carrito;
+}
+
+export interface EstadoCarritos {
+    total: number;
+    carritos: CarritoConTotal[];
+}
+
+export interface CarritosAgrupadosPorEstado {
+    [estado: string]: EstadoCarritos;
+}
+
 
 @Component({
     selector: 'app-pedidos',
     templateUrl: './pedidos.page.html',
     styleUrls: ['./pedidos.page.scss'],
 })
-export class PedidosPage implements OnInit, OnDestroy {
+export class PedidosPage implements OnInit {
 
-    @ViewChild('slides', {static: false}) slider: IonSlides;
-    segment: string = '0';
-    private unsubscribe$ = new Subject<void>();
-    // Contadores
-    cuantosPedidosEnTienda = 0;
-    cuantosPedidosParaEntregar = 0;
-    cuantosPedidos = 0;
-
-    @ViewChild('picker', { static: false }) picker: IonDatetime;
-    datePicker: string = new Date().toISOString();
-    isDatePickerOpen: boolean = false;
-
-    // Arrays de pedidos
-    proximos: Pedido[] = [];
-    pedidos: Pedido[] = [];
-    pedidosEnTienda: Pedido[] = [];
-    pedidosParaEntregar: Pedido[] = [];
-
-    hoy: string;
-    btnSeleccionado: string = 'hoy';
+    carritosPorEstado: CarritosAgrupadosPorEstado = {};
+    estados: string[] = ['CREADO', 'EN_TIENDA', 'TERMINADO', 'EN_RUTA_REPARTIDOR'];
+    estadoSeleccionado: string = 'CREADO';
+    carritosFiltrados: CarritoConTotal[] = [];
 
     constructor(private route: Router,
                 private rest: RESTService,
@@ -57,178 +109,40 @@ export class PedidosPage implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.cambiarFecha();
+        this.cargarCarritos();
     }
 
-    ngOnDestroy() {
-        // Cancelar las suscripciones para evitar fugas de memoria
-        this.unsubscribe$.next();
-        this.unsubscribe$.complete();
-    }
-
-    async segmentChanged() {
-        if (this.slider) {
-            // tslint:disable-next-line:radix
-            await this.slider.slideTo(parseInt(this.segment));
-        }
-    }
-
-    async slideChanged() {
-        if (this.slider) {
-            this.segment = (await this.slider.getActiveIndex()).toString();
-        }
-    }
-
-    orderDetail(idPedido: number) {
-        sessionStorage.setItem('carritoSeleccionado', idPedido.toString());
-        this.route.navigate(['./order-info']);
-    }
-
-    seleccionarTiempo(tiempo: string) {
-        this.btnSeleccionado = tiempo;
-    }
-
-    // Ejemplo de colores para diferentes estados
-    getBackgroundClass(estado: string): string {
-        switch (estado) {
-            case 'Creada':
-                return 'bg-creada';
-            case 'Terminado':
-                return 'bg-terminado';
-            case 'Recolectada':
-                return 'bg-recolectada';
-            default:
-                return 'bg-default';
-        }
-    }
-
-// Método para obtener el ícono según el estado
-    getIconName(estado: string): string {
-        switch (estado) {
-            case 'Creada':
-                return 'arrow-redo-outline';
-            case 'Terminado':
-                return 'checkmark-done-outline';
-            case 'Recolectada':
-                return 'cube-outline';
-            default:
-                return 'help-circle-outline';
-        }
-    }
-
-// Método existente para obtener el color del ícono
-    getIconColor(estado: string): string {
-        switch (estado) {
-            case 'Creada':
-                return 'orangered';
-            case 'Terminado':
-                return 'dodgerblue';
-            case 'Recolectada':
-                return '#99ff00';
-            default:
-                return 'gray';
-        }
-    }
-
-    cambiarFecha() {
-        console.log(this.datePicker);
-        this.isDatePickerOpen = false;
-        console.log('Fecha seleccionada:', this.datePicker);
-
-        this.hoy = this.datepipe.transform(this.datePicker, 'dd MMM yyyy');
-        const fechaAPI = this.datepipe.transform(this.datePicker, 'yyyy-MM-dd');
-
-        // Cargar los pedidos
-        this.rest.obtenerTodosLosPedidosRepartidor(fechaAPI).pipe(
-            takeUntil(this.unsubscribe$)
-        ).subscribe(p => {
-            console.log(p);
-            this.pedidos = p;
-            this.cuantosPedidos = p.length;
-            console.log(p);
-        });
-
-        this.rest.obtenerPedidosEnTienda().pipe(
-            takeUntil(this.unsubscribe$)
-        ).subscribe(p => {
-            this.pedidosEnTienda = p;
-            this.cuantosPedidosEnTienda = p.length;
-            console.log(p);
-        });
-
-        this.rest.obtenerPedidosParaEntrega().pipe(
-            takeUntil(this.unsubscribe$)
-        ).subscribe(p => {
-            this.pedidosParaEntregar = p;
-            this.cuantosPedidosParaEntregar = p.length;
-            console.log(p);
+    cargarCarritos() {
+        this.rest.getCarritosV2().subscribe((response) => {
+            this.carritosPorEstado = response;
+            this.filtrarCarritos(this.estadoSeleccionado);
         });
     }
 
-    async openDatePicker() {
-        const modal = await this.modalController.create({
-            component: DatePickerModalComponent,
-            componentProps: { selectedDate: this.datePicker },
-        });
-
-        modal.onDidDismiss().then((data) => {
-            if (data.data) {
-                this.datePicker = data.data.selectedDate;
-                this.cambiarFecha();
-            }
-        });
-
-        return await modal.present();
+    filtrarCarritos(estado: string) {
+        this.estadoSeleccionado = estado;
+        this.carritosFiltrados = this.carritosPorEstado[estado]?.carritos || [];
     }
 
-    getBackgroundClassForDate(fechaRecoleccion: Date): string {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        // Parse fechaRecoleccion and adjust it to local time
-        const recoleccionDate = new Date(fechaRecoleccion);
-        const adjustedRecoleccionDate = new Date(
-            recoleccionDate.getUTCFullYear(),
-            recoleccionDate.getUTCMonth(),
-            recoleccionDate.getUTCDate()
-        );
-
-        console.log('TODAY:', today);
-        console.log('RECOLECCION:', adjustedRecoleccionDate);
-        console.log('***********************************');
-
-        if (adjustedRecoleccionDate < today) {
-            return 'recoleccion-atrasada';
-        } else if (adjustedRecoleccionDate.getTime() === today.getTime()) {
-            return 'recoleccion-hoy';
-        } else {
-            return 'recoleccion-futura';
-        }
+    verDetalle(carritoId: number) {
+        // Aquí puedes navegar a una página de detalles de carrito, pasando el ID
+        this.route.navigate(['./order-details', {id: carritoId}]);
     }
 
-    getBackgroundClassForDateEntrega(fechaEntrega: Date): string {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        // Parse fechaRecoleccion and adjust it to local time
-        const deliveryDate = new Date(fechaEntrega);
-        const adjustedEntregaDate = new Date(
-            deliveryDate.getUTCFullYear(),
-            deliveryDate.getUTCMonth(),
-            deliveryDate.getUTCDate()
-        );
-
-        console.log('TODAY:', today);
-        console.log('RECOLECCION:', adjustedEntregaDate);
-        console.log('***********************************');
-
-        if (adjustedEntregaDate > today) {
-            return 'recoleccion-atrasada';
-        } else if (adjustedEntregaDate.getTime() === today.getTime()) {
-            return 'recoleccion-hoy';
-        } else {
-            return 'recoleccion-futura';
-        }
+    esRetrasado(fechaRecoleccion: string): boolean {
+        const fechaRecoleccionDate = new Date(fechaRecoleccion);
+        const hoy = new Date();
+        hoy.setHours(0, 0, 0, 0); // Elimina la hora de hoy para comparar solo fechas
+        return fechaRecoleccionDate < hoy;
     }
 
+    protected readonly open = open;
+
+    openConekta(url: string): void {
+        window.open(url, '_blank'); // '_blank' abre en una nueva pestaña o ventana
+    }
+
+    openMaps(lat: number, lng: number) {
+        window.open('https://maps.google.com/?q=' + lat + ',' + lng, '_blank'); // '_blank' abre en una nueva pestaña o ventana
+    }
 }

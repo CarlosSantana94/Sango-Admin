@@ -59,6 +59,10 @@ export class RESTService {
         return this.http.get(environment.url + 'carrito/id/' + idCarrito);
     }
 
+    getCarritoPorIdV2(idCarrito: any): any {
+        return this.http.get(environment.url + 'api/v2/carritos/' + idCarrito);
+    }
+
     postOrdenParaConfirmar(listaDePrendas, idCarrito): any {
         return this.http.post(environment.url + 'prendasConfirmar/' + idCarrito, listaDePrendas);
     }
@@ -95,7 +99,24 @@ export class RESTService {
         return this.http.get(environment.url + 'usuarios');
     }
 
+    getCarritosV2(): any {
+        return this.http.get(environment.url + 'api/v2/carritos/agrupados-por-estado');
+    }
+
+    cambiarEstado(id, estado): any {
+        return this.http.put(environment.url + 'api/v2/carritos/' + id + '/estado?estado=' + estado, null);
+    }
+
     postActualizarUsuario(usuario): any {
-        return this.http.post(environment.url + 'usuario' , usuario);
+        return this.http.post(environment.url + 'usuario', usuario);
+    }
+
+
+    imprimirTicket(id): any {
+        return this.http.post(environment.url + 'api/v2/carritos/' + id + '/imprimir', null);
+    }
+
+    comentarPrenda(idPrenda, comentario): any {
+        return this.http.put(environment.url + 'api/v2/carritos/item/' + idPrenda + '/comentario?comentario=' + comentario, null);
     }
 }
