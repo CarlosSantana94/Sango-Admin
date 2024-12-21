@@ -2,35 +2,26 @@
     <ion-split-pane contentId="main-content">
         <ion-menu contentId="main-content" type="overlay" *ngIf="islogged()">
             <ion-header>
-                <ion-menu-toggle auto-hide="false">
-                    <div class="banner">
-                        <div class="profile_bg center_img">
-                            <img src="assets/imgs/logo_sango.png" class="crop_img">
-                        </div>
-                        <div class="info  d-flex">
-                            <div class="img_box center_img">
-                                <img src="assets/imgs/logo_sango.png" class="crop_img">
-                            </div>
-                        </div>
-                    </div>
-                </ion-menu-toggle>
+                <div class="banner">
+                    <img src="assets/imgs/logo_sango.png" alt="Logo Sango" class="logo-banner" />
+                    <h1>Sango Admin</h1>
+                </div>
             </ion-header>
-
             <ion-content>
-                <ion-list lines="none">
-                    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-                        <ion-item mode="ios" detail-icon="string" [routerLink]="[p.url]">
-                            <div class="item_inner d-flex">
-                                <ion-icon class="ion-text-start" slot="start" [class]="p.icon"></ion-icon>
-                                <h2>{{ p.title | translate}}</h2>
-                            </div>
-                        </ion-item>
-                    </ion-menu-toggle>
+                <ion-list>
+                    <ion-item *ngFor="let p of appPages" [routerLink]="[p.url]">
+                        <div class="item_inner">
+                            <ion-icon [class]="p.icon" slot="start"></ion-icon>
+                            <h2>{{ p.title }}</h2>
+                        </div>
+                    </ion-item>
                 </ion-list>
             </ion-content>
-
-
+            <div class="footer">
+                <p>Powered by <a href="#">Sango</a></p>
+            </div>
         </ion-menu>
+
         <ion-router-outlet id="main-content"></ion-router-outlet>
     </ion-split-pane>
 </ion-app>

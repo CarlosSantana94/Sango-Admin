@@ -3,58 +3,47 @@
         <ion-title>Pedidos</ion-title>
     </ion-toolbar>
 </ion-header>
+
 <ion-content>
-    <ion-segment [(ngModel)]="estadoSeleccionado">
-        <ion-segment-button *ngFor="let estado of estados" (click)="filtrarCarritos(estado)">
-            {{ estado }}
+    <!-- Filtros de estado -->
+    <ion-segment [(ngModel)]="estadoSeleccionado" (ionChange)="filtrarCarritos()">
+        <ion-segment-button *ngFor="let estado of estados" [value]="estado">
+            <ion-text>{{ estadosAlias[estado] }} ({{ carritosPorEstado[estado]?.total || 0 }})</ion-text>
         </ion-segment-button>
     </ion-segment>
 
+    <!-- Filtros por fecha -->
+    <ion-segment [(ngModel)]="filtroFechaSeleccionado" (ionChange)="filtrarPorFecha()">
+        <ion-segment-button value="todos">
+            <ion-text>Todos ({{ conteoPorFecha.todos || 0 }})</ion-text>
+        </ion-segment-button>
+        <ion-segment-button value="retrasados">
+            <ion-text>Retrasados ({{ conteoPorFecha.retrasados || 0 }})</ion-text>
+        </ion-segment-button>
+        <ion-segment-button value="hoy">
+            <ion-text>Hoy ({{ conteoPorFecha.hoy || 0 }})</ion-text>
+        </ion-segment-button>
+        <ion-segment-button value="futuros">
+            <ion-text>Futuros ({{ conteoPorFecha.futuros || 0 }})</ion-text>
+        </ion-segment-button>
+    </ion-segment>
+
+    <!-- Lista de carritos filtrados -->
     <ion-grid>
         <ion-row>
-            <ion-col size="6" size-md="6" *ngFor="let carrito of carritosFiltrados">
-                <ion-card [ngClass]="{'retrasado': esRetrasado(carrito.carrito.envios.fechaRecoleccion)}">
+            <ion-col size="12" size-md="6" *ngFor="let carrito of carritosFiltrados">
+                <ion-card>
                     <ion-card-header>
                         <ion-card-title>Orden #{{ carrito.carrito.id }}</ion-card-title>
-                        <ion-card-title *ngIf="esRetrasado(carrito.carrito.envios.fechaRecoleccion)">
-                            <ion-icon name="alert-circle-outline"></ion-icon>
-                            RETRASADO
-                        </ion-card-title>
-                        <ion-card-title *ngIf="!esRetrasado(carrito.carrito.envios.fechaRecoleccion)">
-                            <ion-icon name="checkmark-circle-outline"></ion-icon>
-                            A TIEMPO
-                        </ion-card-title>
-                        <ion-card-subtitle  style="color: #3535ab !important;"
-                                (click)="openMaps(carrito.carrito.direccion.lat,carrito.carrito.direccion.lng)">
-                            <ion-icon name="home-outline"></ion-icon>
-                            {{ carrito.carrito.direccion.direccion }}
-                        </ion-card-subtitle>
-                        <ion-card-subtitle style="color: black!important;">{{ carrito.carrito.direccion.nombre }}</ion-card-subtitle>
-                        <ion-card-subtitle  style="color: black!important;">{{ carrito.carrito.direccion.tel }}</ion-card-subtitle>
-                        <ion-card-subtitle  style="color: black!important;" *ngIf="carrito.carrito.formaDePago==='tarjeta'">Total:
-                            ${{ carrito.totalCarrito }}
-                        </ion-card-subtitle>
-                        <ion-card-subtitle style="color: green !important;"
-                                           *ngIf="carrito.carrito.formaDePago==='tarjeta'"
-                                           (click)="openConekta('https://panel.conekta.com/transactions/payments/'+carrito.carrito.ordenConekta)">
-
-                            <ion-icon name="pricetag-outline"></ion-icon>
-                            PAGADA
-                        </ion-card-subtitle>
-                        <ion-card-subtitle style="color: orangered !important;" *ngIf="carrito.carrito.formaDePago==='efectivo'"
-                                           (click)="openConekta('https://panel.conekta.com/transactions/payments/'+carrito.carrito.ordenConekta)">
-
-                            <ion-icon name="cash-outline"></ion-icon>
-                            Pagar al: {{ carrito.carrito.cuandoOToken }}
-                        </ion-card-subtitle>
+                        <ion-card-subtitle>Total: ${{ carrito.totalCarrito }}</ion-card-subtitle>
                     </ion-card-header>
-
                     <ion-card-content>
-                        <p>
-                            <strong>Recolección:</strong> {{ carrito.carrito.envios.fechaRecoleccion | date:'dd/MMM/yyyy' }}
-                        </p>
-                        <p><strong>Entrega:</strong> {{ carrito.carrito.envios.fechaEntrega | date:'dd/MMM/yyyy' }}</p>
-                        <ion-button color="success" (click)="verDetalle(carrito.carrito.id)">Ver Detalle</ion-button>
+                        <p><strong>Recolección:</strong> {{ carrito.carrito.envios.fechaRecoleccion | date:'dd/MM/yyyy' }}</p>
+                        <p><strong>Entrega:</strong> {{ carrito.carrito.envios.fechaEntrega | date:'dd/MM/yyyy' }}</p>
+                        <p><strong>Cliente:</strong> {{ carrito.carrito.direccion.nombre }}</p>
+                        <p><strong>Dirección:</strong> {{ carrito.carrito.direccion.direccion }}</p>
+                        <p><strong>Teléfono:</strong> {{ carrito.carrito.direccion.tel }}</p>
+                        <ion-button color="primary" (click)="verDetalle(carrito.carrito.id)">Ver Detalle</ion-button>
                     </ion-card-content>
                 </ion-card>
             </ion-col>

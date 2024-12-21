@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {IonDatetime, IonSlides, ModalController} from '@ionic/angular';
 import {Subscription, Subject} from 'rxjs';
@@ -8,6 +8,17 @@ import {RESTService} from '../rest.service';
 
 
 export type EstadoCarrito = 'CREADO' | 'EN_TIENDA' | 'TERMINADO' | 'EN_RUTA_REPARTIDOR';
+
+export interface CarritosAgrupadosPorEstado {
+    [estado: string]: {
+        total: number;
+        carritosPorFecha: {
+            retrasados: CarritoConTotal[];
+            hoy: CarritoConTotal[];
+            futuros: CarritoConTotal[];
+        };
+    };
+}
 
 export interface Servicio {
     id: number;
@@ -85,9 +96,7 @@ export interface EstadoCarritos {
     carritos: CarritoConTotal[];
 }
 
-export interface CarritosAgrupadosPorEstado {
-    [estado: string]: EstadoCarritos;
-}
+
 
 
 @Component({
@@ -97,14 +106,35 @@ export interface CarritosAgrupadosPorEstado {
 })
 export class PedidosPage implements OnInit {
 
+    // Diccionario que mapea los estados a sus alias
+
+
     carritosPorEstado: CarritosAgrupadosPorEstado = {};
     estados: string[] = ['CREADO', 'EN_TIENDA', 'TERMINADO', 'EN_RUTA_REPARTIDOR'];
     estadoSeleccionado: string = 'CREADO';
-    carritosFiltrados: CarritoConTotal[] = [];
+    carritosFiltrados: CarritoConTotal[] = []; // Asegúrate de inicializar como un arreglo vacío
+
+    filtroFechaSeleccionado: string = 'todos';
+
+    conteoPorFecha: { [key: string]: number } = {
+        todos: 0,
+        retrasados: 0,
+        hoy: 0,
+        futuros: 0,
+    };
+
+
+    estadosAlias: { [key: string]: string } = {
+        CREADO: 'Recolectar',
+        EN_TIENDA: 'En Sucursal',
+        TERMINADO: 'Terminados',
+        EN_RUTA_REPARTIDOR: 'Entregando'
+    };
 
     constructor(private route: Router,
                 private rest: RESTService,
                 private modalController: ModalController,
+                private cd: ChangeDetectorRef,
                 public datepipe: DatePipe) {
     }
 
@@ -115,14 +145,60 @@ export class PedidosPage implements OnInit {
     cargarCarritos() {
         this.rest.getCarritosV2().subscribe((response) => {
             this.carritosPorEstado = response;
-            this.filtrarCarritos(this.estadoSeleccionado);
+            this.filtrarCarritos(); // Inicializa los filtros
         });
     }
 
-    filtrarCarritos(estado: string) {
-        this.estadoSeleccionado = estado;
-        this.carritosFiltrados = this.carritosPorEstado[estado]?.carritos || [];
+
+    actualizarConteos() {
+        const carritosEstado = this.carritosPorEstado[this.estadoSeleccionado]?.carritosPorFecha || {
+            retrasados: [],
+            hoy: [],
+            futuros: []
+        };
+
+        this.conteoPorFecha.retrasados = carritosEstado.retrasados.length;
+        this.conteoPorFecha.hoy = carritosEstado.hoy.length;
+        this.conteoPorFecha.futuros = carritosEstado.futuros.length;
+        this.conteoPorFecha.todos =
+            this.conteoPorFecha.retrasados +
+            this.conteoPorFecha.hoy +
+            this.conteoPorFecha.futuros;
     }
+
+
+
+    filtrarCarritos() {
+        const carritosEstado = this.carritosPorEstado[this.estadoSeleccionado]?.carritosPorFecha || {
+            retrasados: [],
+            hoy: [],
+            futuros: []
+        };
+
+        switch (this.filtroFechaSeleccionado) {
+            case 'retrasados':
+                this.carritosFiltrados = carritosEstado.retrasados;
+                break;
+            case 'hoy':
+                this.carritosFiltrados = carritosEstado.hoy;
+                break;
+            case 'futuros':
+                this.carritosFiltrados = carritosEstado.futuros;
+                break;
+            default: // Todos
+                this.carritosFiltrados = [
+                    ...carritosEstado.retrasados,
+                    ...carritosEstado.hoy,
+                    ...carritosEstado.futuros
+                ];
+                break;
+        }
+
+        this.actualizarConteos();
+        this.cd.detectChanges(); // Fuerza la actualización del DOM
+    }
+
+
 
     verDetalle(carritoId: number) {
         // Aquí puedes navegar a una página de detalles de carrito, pasando el ID
@@ -145,4 +221,12 @@ export class PedidosPage implements OnInit {
     openMaps(lat: number, lng: number) {
         window.open('https://maps.google.com/?q=' + lat + ',' + lng, '_blank'); // '_blank' abre en una nueva pestaña o ventana
     }
+
+    filtrarPorFecha() {
+        this.filtrarCarritos();
+    }
+
+
+
+
 }

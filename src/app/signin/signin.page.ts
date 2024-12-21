@@ -37,7 +37,7 @@ export class SigninPage implements OnInit {
 
     home() {
         if (this.username === 'admin' && this.password === 'admin') {
-            this.navCtrl.navigateRoot(['./principal']);
+            this.navCtrl.navigateRoot(['./pedidos']);
             sessionStorage.setItem('lg', '1');
         }
     }

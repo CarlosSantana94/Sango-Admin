@@ -19,66 +19,61 @@ export class AppComponent implements OnInit {
     public selectedIndex = 0;
     public appPages = [
         {
-            title: 'Inicio',
-            url: '/principal',
-            icon: 'zmdi zmdi-home'
-        },
-        {
             title: 'Pedidos',
             url: '/pedidos',
-            icon: 'zmdi zmdi-money'
+            icon: 'mdi mdi-clipboard-list-outline'
         },
         {
             title: 'Solicitud Cancelaciones',
             url: '/solicitud-cancelaciones',
-            icon: 'zmdi zmdi-close'
+            icon: 'mdi mdi-close'
         },
         /*{
             title: 'dashboard',
             url: '/home',
-            icon: 'zmdi zmdi-desktop-mac'
+            icon: 'mdi mdi-desktop-mac'
         },*/
         {
             title: 'Ruta',
             url: '/mapa',
-            icon: 'zmdi zmdi-map'
+            icon: 'mdi mdi-map'
         },
 
         {
             title: 'Productos',
             url: '/items',
-            icon: 'zmdi zmdi-shopping-basket'
+            icon: 'mdi mdi-barcode-scan'
         },
 
         /* {
              title: 'Categorias',
              url: '/categories',
-             icon: 'zmdi zmdi-layers'
+             icon: 'mdi mdi-layers'
          },*/
 
         {
             title: 'Usuarios',
             url: '/usuarios',
-            icon: 'zmdi zmdi-accounts-list-alt'
-        }, {
+            icon: 'mdi mdi-account-group'
+        },/* {
             title: 'Mensajes',
             url: '/messages',
-            icon: 'zmdi zmdi-comments'
-        },
+            icon: 'mdi mdi-comments'
+        },*/
         {
             title: 'Cerrar Sesión',
             url: '/signin',
-            icon: 'zmdi zmdi-power'
+            icon: 'mdi mdi-power'
         },
         {
             title: 'Aviso De Privacidad',
             url: '/aviso-de-privacidad',
-            icon: 'zmdi zmdi-attachment-alt'
+            icon: 'mdi mdi-text-box-multiple-outline'
         },
         {
             title: 'Terminos Y Condiciones',
             url: '/terminos-ycondiciones',
-            icon: 'zmdi zmdi-attachment-alt'
+            icon: 'mdi mdi-text-box-multiple-outline'
         }
     ];
 
